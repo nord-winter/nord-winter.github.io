@@ -6,9 +6,9 @@ export const siteConfig = {
   accentColor: "#1B4F8A",
   social: {
     email: "vladsimutin@gmail.com",
-    linkedin: "https://linkedin.com/in/vladislavsimutin",
+    linkedin: "https://linkedin.com/in/vladislav-simutin",
     twitter: "",
-    github: "https://github.com/nvmbr-hub",
+    github: "https://github.com/nord-winter",
   },
   aboutMe:
     "Platform/Infrastructure Engineer with 5+ years building and operating production systems. Designed microservice architectures handling 80K+ RPS, automated GCP infrastructure lifecycle with Go and Terraform, reduced infrastructure costs by 40% through VM automation. Built production RAG agents and LLM integrations. Background in information security (Perm Military University) — actively deepening toward Security Architecture.",
