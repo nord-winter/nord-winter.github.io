@@ -1,8 +1,8 @@
 ---
-const cloudName = import.meta.env.CLOUDINARY_CLOUD_NAME;
-const apiKey = import.meta.env.CLOUDINARY_API_KEY;
-const apiSecret = import.meta.env.CLOUDINARY_API_SECRET;
-const tag = import.meta.env.CLOUDINARY_PHOTOS_TAG || "portfolio";
+const cloudName = import.meta.env.CLOUDINARY_CLOUD_NAME ?? process.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = import.meta.env.CLOUDINARY_API_KEY ?? process.env.CLOUDINARY_API_KEY;
+const apiSecret = import.meta.env.CLOUDINARY_API_SECRET ?? process.env.CLOUDINARY_API_SECRET;
+const tag = import.meta.env.CLOUDINARY_PHOTOS_TAG ?? process.env.CLOUDINARY_PHOTOS_TAG ?? "my-photos-site-collection";
 
 let photos: string[] = [];
 
