@@ -1,0 +1,120 @@
+---
+const cloudName = import.meta.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = import.meta.env.CLOUDINARY_API_KEY;
+const apiSecret = import.meta.env.CLOUDINARY_API_SECRET;
+const tag = import.meta.env.CLOUDINARY_PHOTOS_TAG || "portfolio";
+
+let photos: string[] = [];
+
+if (cloudName && apiKey && apiSecret) {
+  try {
+    const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString("base64");
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/tags/${tag}?max_results=50`,
+      { headers: { Authorization: `Basic ${auth}` } }
+    );
+    const data = await res.json();
+    photos = (data.resources ?? []).map((r: { public_id: string }) => r.public_id);
+  } catch (e) {
+    console.warn("Cloudinary fetch failed:", e);
+  }
+}
+
+function cloudinaryUrl(publicId: string) {
+  return `https://res.cloudinary.com/${cloudName}/image/upload/w_900,h_600,c_fill,g_auto,f_webp,q_auto/${publicId}`;
+}
+
+function cloudinaryFullUrl(publicId: string) {
+  return `https://res.cloudinary.com/${cloudName}/image/upload/w_1600,f_webp,q_auto/${publicId}`;
+}
+---
+
+{
+  photos.length > 0 && (
+    <section id="photos" class="py-10 md:py-14 bg-white overflow-hidden">
+      <div class="mx-auto px-8 sm:px-12 md:px-24 mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 font-mono">
+          Photos
+        </h2>
+      </div>
+
+      <div class="relative">
+        <!-- Carousel track -->
+        <div
+          id="photo-track"
+          class="flex gap-4 overflow-x-auto scroll-smooth px-8 sm:px-12 md:px-24 pb-4"
+          style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {photos.map((id, i) => (
+            <button
+              class="flex-none rounded-xl overflow-hidden shadow-sm cursor-zoom-in focus:outline-none"
+              style="scroll-snap-align: start; width: min(75vw, 540px);"
+              data-full={cloudinaryFullUrl(id)}
+              onclick="document.getElementById('photo-lightbox').querySelector('img').src=this.dataset.full;document.getElementById('photo-lightbox').showModal()"
+            >
+              <img
+                src={cloudinaryUrl(id)}
+                alt={`Photo ${i + 1}`}
+                class="w-full h-full object-cover pointer-events-none"
+                style="aspect-ratio: 3/2;"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </button>
+          ))}
+        </div>
+
+        <!-- Prev / Next -->
+        <button
+          id="photo-prev"
+          aria-label="Previous"
+          class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-sm transition-opacity duration-200 opacity-0"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <button
+          id="photo-next"
+          aria-label="Next"
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white border border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-sm transition-opacity duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+  )
+}
+
+<dialog
+  id="photo-lightbox"
+  class="fixed inset-0 m-auto p-0 bg-transparent max-w-[95vw] max-h-[95vh] rounded-xl overflow-hidden shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm"
+  onclick="this.close()"
+>
+  <img src="" alt="Photo" class="max-w-[95vw] max-h-[95vh] object-contain block" />
+</dialog>
+
+<style>
+  #photo-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  const track = document.getElementById("photo-track");
+  const prev = document.getElementById("photo-prev");
+  const next = document.getElementById("photo-next");
+
+  if (track && prev && next) {
+    const scrollBy = () => (track.firstElementChild as HTMLElement)?.offsetWidth + 16 || 300;
+
+    next.addEventListener("click", () => track.scrollBy({ left: scrollBy(), behavior: "smooth" }));
+    prev.addEventListener("click", () => track.scrollBy({ left: -scrollBy(), behavior: "smooth" }));
+
+    track.addEventListener("scroll", () => {
+      prev.style.opacity = track.scrollLeft > 10 ? "1" : "0";
+      next.style.opacity = track.scrollLeft + track.clientWidth < track.scrollWidth - 10 ? "1" : "0";
+    });
+  }
+</script>

@@ -5,11 +5,11 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
 
 {
   hasExperience && (
-    <section id="experience" class="p-8 sm:p-12 md:p-16 lg:p-24">
+    <section id="experience" class="py-10 md:py-14 px-8 sm:px-12 md:px-24">
       <div>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-bold text-gray-900">
               Experience
             </h2>
             <div
@@ -35,7 +35,7 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
 
                   {/* Experience card */}
                   <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 hover:shadow-md transition-shadow duration-300">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
                       <div>
                         <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
                           {exp.title}
@@ -46,11 +46,20 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
                         >
                           {exp.company}
                         </p>
+                        {"location" in exp && exp.location && (
+                          <p class="text-xs sm:text-sm text-gray-400 mt-0.5">{exp.location}</p>
+                        )}
                       </div>
-                      <span class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0">
+                      <span class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0 sm:text-right shrink-0">
                         {exp.dateRange}
                       </span>
                     </div>
+
+                    {"about" in exp && exp.about && (
+                      <p class="text-xs sm:text-sm text-gray-400 italic mb-4 pb-4 border-b border-gray-100">
+                        {exp.about}
+                      </p>
+                    )}
 
                     <ul class="space-y-2">
                       {exp.bullets.map((bullet) => (
