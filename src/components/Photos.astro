@@ -6,18 +6,26 @@ const tag = import.meta.env.CLOUDINARY_PHOTOS_TAG ?? process.env.CLOUDINARY_PHOT
 
 let photos: string[] = [];
 
+console.log("[Photos] cloudName:", cloudName, "| apiKey:", apiKey ? "SET" : "MISSING", "| tag:", tag);
+
 if (cloudName && apiKey && apiSecret) {
   try {
     const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString("base64");
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/tags/${tag}?max_results=50`,
-      { headers: { Authorization: `Basic ${auth}` } }
-    );
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/tags/${tag}?max_results=50`;
+    console.log("[Photos] fetching:", url);
+    const res = await fetch(url, { headers: { Authorization: `Basic ${auth}` } });
+    console.log("[Photos] response status:", res.status);
     const data = await res.json();
+    if (!res.ok) {
+      console.error("[Photos] API error:", JSON.stringify(data));
+    }
     photos = (data.resources ?? []).map((r: { public_id: string }) => r.public_id);
+    console.log("[Photos] found:", photos.length, "photos");
   } catch (e) {
-    console.warn("Cloudinary fetch failed:", e);
+    console.error("[Photos] fetch failed:", e);
   }
+} else {
+  console.warn("[Photos] missing env vars — skipping fetch");
 }
 
 function cloudinaryUrl(publicId: string) {
