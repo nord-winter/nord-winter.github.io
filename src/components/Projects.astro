@@ -5,100 +5,140 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 
 {
   hasProjects && (
-    <section id="projects" class="p-8 sm:p-12 md:p-16 lg:p-24">
-      <div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-          <div class="lg:col-span-4">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Projects
-            </h2>
-            <div
-              class="w-[75px] h-[5px] mt-2 rounded-full"
-              style={`background-color: ${siteConfig.accentColor}`}
-            />
-          </div>
+    <section
+      id="projects"
+      class="py-8"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <div class="mb-8">
+        <span class="inline-block px-3 py-1 bg-[color:var(--primary)] text-white font-mono text-[0.65rem] uppercase tracking-[0.1em] mb-4">
+          Module_Registry_v1.2
+        </span>
+        <h2 class="font-mono text-2xl md:text-3xl font-bold uppercase tracking-tight text-[color:var(--primary)]">
+          Projects_X
+        </h2>
+        <p class="mt-2 text-sm md:text-base text-[color:var(--on-surface-variant)] max-w-2xl">
+          Shipped systems and side builds, from backend platforms to full-stack tools.
+        </p>
+      </div>
 
-          <div class="lg:col-span-8">
-            <div class="space-y-8">
-              {siteConfig.projects.map((project, index) => {
-                const Component = project.link ? "a" : "div";
-                const linkProps = project.link
-                  ? {
-                      href: project.link,
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                    }
-                  : {};
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {siteConfig.projects.map((project, index) => {
+          const Component = project.link ? "a" : "div";
+          const linkProps = project.link
+            ? {
+                href: project.link,
+                target: "_blank",
+                rel: "noopener noreferrer",
+              }
+            : {};
+          const category = project.skills?.[0]?.toUpperCase() ?? "MODULE";
 
-                return (
-                  <div class="group relative">
-                    <Component
-                      {...linkProps}
-                      class={`block relative p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 ${
-                        project.link
-                          ? "hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1"
-                          : ""
-                      }`}
-                    >
-                      {project.link && (
-                        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-gray-900 rounded-full text-white transition-all duration-300 group-hover:bg-gray-700">
-                          <svg
-                            class="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M7 17L17 7M17 7H7M17 7V17"
-                            />
-                          </svg>
-                        </div>
-                      )}
+          return (
+            <div class="project-card module-seam bg-white overflow-hidden flex flex-col">
+              {project.image && (
+                <div class="aspect-video overflow-hidden border-b border-[color:var(--outline-variant)] bg-[color:var(--surface-container-low)]">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    class="w-full h-full object-cover mix-blend-multiply opacity-80"
+                  />
+                </div>
+              )}
 
-                      <div class="space-y-4">
-                        <div>
-                          <span
-                            class="text-sm font-mono"
-                            style={{ color: siteConfig.accentColor }}
-                          >
-                            0{index + 1}
-                          </span>
-                          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mt-1">
-                            {project.name}
-                          </h3>
-                        </div>
+              <div class="p-5 flex-1 flex flex-col">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">
+                    UNIT-{index + 1} // {category}
+                  </span>
+                  <span class="flex items-center gap-1.5 bg-green-50 px-2 py-0.5 rounded-full border border-green-200">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 status-blink" />
+                    <span class="font-mono text-[0.6rem] text-green-700">Active</span>
+                  </span>
+                </div>
 
-                        <p
-                          class={`text-base sm:text-lg text-gray-600 leading-relaxed ${project.link ? "pr-12 sm:pr-14 md:pr-16" : ""}`}
-                        >
-                          {project.description}
-                        </p>
+                <h3 class="mt-2 font-mono text-lg font-semibold text-[color:var(--on-surface)]">
+                  Project_0{index + 1}
+                </h3>
+                <span class="font-mono text-[0.65rem] text-[color:var(--secondary)]">
+                  {project.name}
+                </span>
 
-                        {project.skills && project.skills.length > 0 && (
-                          <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-2">
-                            {project.skills.map((skill) => (
-                              <span
-                                class={`px-2.5 sm:px-3 py-1 sm:py-1.5 bg-gray-900 text-white rounded-md sm:rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
-                                  project.link ? "group-hover:bg-gray-800" : ""
-                                }`}
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </Component>
+                <div class="mt-4 border-l-2 border-[color:var(--primary)] pl-3">
+                  <span class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--secondary)] block mb-1">
+                    Capabilities_Map
+                  </span>
+                  <p class="text-sm text-[color:var(--on-surface)] leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div class="mt-4 grid grid-cols-2 gap-3">
+                  <div class="bg-[color:var(--surface-container)] p-2.5 border border-[color:var(--outline-variant)]">
+                    <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
+                      Stack_Size
+                    </div>
+                    <div class="mt-0.5 font-mono text-xs text-[color:var(--on-surface)]">
+                      {project.skills?.length ?? 0} Modules
+                    </div>
                   </div>
-                );
-              })}
+                  <div class="bg-[color:var(--surface-container)] p-2.5 border border-[color:var(--outline-variant)]">
+                    <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
+                      Status
+                    </div>
+                    <div class="mt-0.5 font-mono text-xs text-[color:var(--on-surface)]">Stable</div>
+                  </div>
+                </div>
+
+                {project.skills && project.skills.length > 0 && (
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    {project.skills.map((skill) => (
+                      <span class="chip !text-xs !py-1 !px-2">{skill}</span>
+                    ))}
+                  </div>
+                )}
+
+                <Component
+                  {...linkProps}
+                  class={`cta-btn mt-5 w-full py-2.5 font-mono text-xs uppercase tracking-[0.08em] flex items-center justify-center gap-2 border transition-colors ${
+                    project.link
+                      ? "border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white"
+                      : "border-[color:var(--outline-variant)] text-[color:var(--secondary)] cursor-default"
+                  }`}
+                >
+                  {project.link ? "Access_Terminal" : "Archived"}
+                  {project.link && (
+                    <span class="material-symbols-outlined text-[16px] cta-chevron">chevron_right</span>
+                  )}
+                </Component>
+              </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </section>
   )
 }
+
+<style>
+  .project-card {
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    background-color: rgba(0, 82, 155, 0.025);
+  }
+
+  .cta-chevron {
+    transition: transform 0.15s ease;
+  }
+
+  .cta-btn:hover .cta-chevron {
+    transform: translateX(3px);
+  }
+</style>

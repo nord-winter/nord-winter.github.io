@@ -1,0 +1,234 @@
+---
+import { siteConfig } from "../config";
+const hasAchievements = siteConfig.achievements && siteConfig.achievements.length > 0;
+
+const earthData = [
+  { label: "Moon_Dist", value: "384,400 KM" },
+  { label: "Axial_Tilt", value: "23.44°" },
+  { label: "Orbit_V", value: "29.78 KM/S" },
+  { label: "Day_Len", value: "23:56" },
+];
+
+const logLines = siteConfig.achievements.map((line) => `> ${line}`);
+---
+
+{
+  hasAchievements && (
+    <section
+      id="archive"
+      class="py-8"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <div class="panel-header">
+        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">live_tv</span>
+        <h2 class="panel-label">Transmission_Archive</h2>
+        <span class="panel-tag ml-auto">{siteConfig.achievements.length} Records</span>
+      </div>
+
+      <div class="archive-card bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6 flex flex-col md:flex-row gap-4">
+        <div class="flex-1 flex flex-col gap-2">
+          <div class="flex items-center justify-between px-1">
+            <span class="font-mono text-xs text-[color:var(--secondary)]">CH_01 // Archive_Feed</span>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[color:var(--error)] status-blink" />
+              <span class="font-mono text-[0.65rem] text-[color:var(--error)]">Rec</span>
+              <span class="w-2 h-2 rounded-full bg-green-500" style="box-shadow: 0 0 4px #22c55e" />
+            </div>
+          </div>
+
+          <div class="aspect-square bg-[color:var(--inverse-surface)] rounded-xl p-2 shadow-inner">
+            <div class="crt-screen w-full h-full rounded-lg border-2 border-black/70 relative overflow-hidden">
+              <div class="absolute inset-0 overflow-hidden p-4 flex flex-col justify-end">
+                <div class="scrolling-log">
+                  {logLines.map((line) => (
+                    <p class="log-line">{line}</p>
+                  ))}
+                  {logLines.map((line) => (
+                    <p class="log-line" aria-hidden="true">{line}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-1 flex flex-col gap-2 justify-end">
+          <div class="grid grid-cols-2 gap-2">
+            {earthData.map((item) => (
+              <div class="bg-[color:var(--surface-container)] border border-[color:var(--outline-variant)] rounded p-3 flex flex-col gap-1.5">
+                <span class="font-mono text-[0.65rem] text-[color:var(--on-surface-variant)] border-b border-[color:var(--outline-variant)] pb-1">
+                  {item.label}
+                </span>
+                <span class="font-mono text-base font-semibold text-[color:var(--on-surface)]">
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div class="bg-[color:var(--surface-container-high)] border border-[color:var(--outline-variant)] rounded p-3 flex items-center justify-between">
+            <span class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--on-surface)]">
+              Override_Auth
+            </span>
+            <div class="flex gap-3">
+              <label class="toggle">
+                <input type="checkbox" checked />
+                <span class="toggle-track" />
+              </label>
+              <label class="toggle">
+                <input type="checkbox" />
+                <span class="toggle-track" />
+              </label>
+            </div>
+          </div>
+
+          <button type="button" class="sync-button" id="sync-btn">
+            Execute_Sync
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const btn = document.getElementById("sync-btn");
+  btn?.addEventListener("click", () => {
+    btn.classList.add("sync-pulse");
+    setTimeout(() => btn.classList.remove("sync-pulse"), 500);
+  });
+</script>
+
+<style>
+  .archive-card {
+    border: 1px solid var(--outline-variant);
+    box-shadow: 2px 2px 0px 0px var(--primary);
+  }
+
+  .crt-screen {
+    background-color: #000;
+    box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.8);
+  }
+
+  .crt-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size:
+      100% 4px,
+      6px 100%;
+  }
+
+  .crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: inset 0 0 4rem rgba(0, 0, 0, 1);
+  }
+
+  .scrolling-log {
+    animation: scroll-up 20s linear infinite;
+  }
+
+  @keyframes scroll-up {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  .log-line {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6fb4ff;
+    text-shadow:
+      0 0 6px rgba(79, 168, 255, 0.85),
+      0 0 2px rgba(79, 168, 255, 0.5);
+  }
+
+  .toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle-track {
+    width: 34px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--outline-variant);
+    position: relative;
+    transition: background-color 0.15s ease;
+  }
+
+  .toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid var(--outline-variant);
+    transition: transform 0.15s ease;
+  }
+
+  .toggle input:checked + .toggle-track {
+    background: var(--primary);
+  }
+
+  .toggle input:checked + .toggle-track::after {
+    transform: translateX(14px);
+    border-color: white;
+  }
+
+  .sync-button {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--primary);
+    box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.15);
+    transition:
+      filter 0.15s ease,
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+  }
+
+  .sync-button:hover {
+    filter: brightness(1.1);
+  }
+
+  .sync-button:active,
+  .sync-button.sync-pulse {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.15);
+  }
+</style>

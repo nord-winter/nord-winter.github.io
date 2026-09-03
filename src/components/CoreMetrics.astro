@@ -1,0 +1,101 @@
+---
+import { siteConfig } from "../config";
+
+const REPO_OWNER = "nord-winter";
+const REPO_NAME = "nord-winter.github.io";
+
+type Metric = { label: string; value: string };
+
+let liveMetrics: Metric[] | null = null;
+
+try {
+  const repoRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
+
+  if (repoRes.ok) {
+    const repo = await repoRes.json();
+    const ageDays = Math.floor(
+      (Date.now() - new Date(repo.created_at).getTime()) / 86400000,
+    );
+
+    const commitsRes = await fetch(
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=1`,
+    );
+    let commitCount = 1;
+    if (commitsRes.ok) {
+      const link = commitsRes.headers.get("link");
+      const match = link?.match(/[?&]page=(\d+)>;\s*rel="last"/);
+      if (match) commitCount = parseInt(match[1], 10);
+    }
+
+    liveMetrics = [
+      { label: "Repo_Age", value: `${ageDays} Days` },
+      { label: "Commits", value: `${commitCount}` },
+      { label: "Stars", value: `${repo.stargazers_count}` },
+    ];
+  }
+} catch {
+  liveMetrics = null;
+}
+
+const metrics = liveMetrics ?? siteConfig.metrics;
+const isLive = liveMetrics !== null;
+---
+
+<div class="md:col-span-12 module-seam bg-white p-6 lg:p-8">
+  <div class="panel-header">
+    <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">query_stats</span>
+    <h2 class="panel-label">Core_Metrics // Repo_Telemetry</h2>
+    <span class="panel-tag ml-auto">{isLive ? "Github_Api // Live" : "Static_Fallback"}</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="p-6 module-seam brushed-metal hover:brightness-105 transition-all">
+      <div class="font-mono text-xs uppercase mb-4 text-[color:var(--primary)] font-bold">
+        {metrics[0].label}
+      </div>
+      <div class="font-mono text-3xl text-[color:var(--primary)] font-bold">
+        {metrics[0].value}
+      </div>
+      <div class="mt-4 h-10 flex items-end gap-1">
+        <div class="w-full bg-[rgba(0,82,155,0.2)] h-[40%]" />
+        <div class="w-full bg-[rgba(0,82,155,0.4)] h-[55%]" />
+        <div class="w-full bg-[rgba(0,82,155,0.6)] h-[70%]" />
+        <div class="w-full bg-[rgba(0,82,155,0.8)] h-[85%]" />
+        <div class="w-full bg-[color:var(--primary)] h-[99%]" />
+      </div>
+    </div>
+
+    <div class="p-6 module-seam brushed-metal hover:brightness-105 transition-all">
+      <div class="font-mono text-xs uppercase mb-4 text-[color:var(--primary)] font-bold">
+        {metrics[1].label}
+      </div>
+      <div class="font-mono text-3xl text-[color:var(--primary)] font-bold">
+        {metrics[1].value}
+      </div>
+      <div class="mt-4 h-10 flex items-center justify-center border-t border-[color:var(--outline-variant)] pt-2 gap-2">
+        <span class="material-symbols-outlined text-[color:var(--primary)] status-blink text-[18px]">
+          commit
+        </span>
+        <span class="font-mono text-xs text-[color:var(--primary)] font-bold">
+          {isLive ? "Sync_Verified" : "Awaiting_Sync"}
+        </span>
+      </div>
+    </div>
+
+    <div class="p-6 module-seam brushed-metal hover:brightness-105 transition-all">
+      <div class="font-mono text-xs uppercase mb-4 text-[color:var(--primary)] font-bold">
+        {metrics[2].label}
+      </div>
+      <div class="font-mono text-3xl text-[color:var(--primary)] font-bold">
+        {metrics[2].value}
+      </div>
+      <div class="mt-4 grid grid-cols-5 gap-1">
+        <div class="aspect-square bg-blue-500/20 border border-blue-500/50" />
+        <div class="aspect-square bg-blue-500/40 border border-blue-500/50" />
+        <div class="aspect-square bg-blue-500/60 border border-blue-500/50" />
+        <div class="aspect-square bg-blue-500/80 border border-blue-500/50" />
+        <div class="aspect-square bg-blue-500 border border-blue-500/50" />
+      </div>
+    </div>
+  </div>
+</div>

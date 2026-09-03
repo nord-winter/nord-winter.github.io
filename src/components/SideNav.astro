@@ -1,0 +1,120 @@
+---
+import { siteConfig } from "../config";
+
+const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
+const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+const hasEducation = siteConfig.education && siteConfig.education.length > 0;
+const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
+
+const items = [
+  { id: "about", label: "Dashboard", icon: "dashboard" },
+  hasProjects && { id: "projects", label: "Capabilities", icon: "extension" },
+  hasExperience && { id: "experience", label: "Mission_Logs", icon: "terminal" },
+  hasEducation && {
+    id: "education",
+    label: "Training",
+    icon: "settings_input_antenna",
+  },
+  hasPosts && { id: "log", label: "Dispatch", icon: "rss_feed" },
+].filter(Boolean) as { id: string; label: string; icon: string }[];
+
+const nameUpper = siteConfig.name.toUpperCase().replace(/ /g, "_");
+---
+
+<aside
+  id="sidenav"
+  class="hidden lg:flex flex-col fixed left-0 top-0 h-full w-64 bg-[color:var(--surface-container-low)] border-r border-[color:var(--outline-variant)] pt-24 pb-8 z-40"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <div class="mb-8 px-6">
+    <div class="font-mono text-base font-semibold text-[color:var(--primary)] mb-1">
+      {nameUpper}
+    </div>
+    <div class="font-mono text-[0.7rem] text-[color:var(--on-surface-variant)] flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-blue-500 status-blink" />
+      STATUS: ONLINE
+    </div>
+  </div>
+
+  <nav class="space-y-1 flex-grow">
+    {
+      items.map((item) => (
+        <a
+          href={`#${item.id}`}
+          data-section={item.id}
+          class="sidenav-link flex items-center gap-3 px-6 py-3 font-mono text-xs tracking-[0.1em] uppercase text-[color:var(--on-surface-variant)] hover:bg-[color:var(--surface-container)] transition-colors"
+        >
+          <span class="material-symbols-outlined text-[20px]">{item.icon}</span>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <a
+    href={`mailto:${siteConfig.social.email}`}
+    class="mx-6 mt-6 py-3 bg-[color:var(--primary)] text-white font-mono text-xs tracking-[0.15em] uppercase text-center active:scale-95 transition-transform hover:brightness-110"
+  >
+    Initiate_Link
+  </a>
+
+  <div class="mt-8 px-6 flex flex-col gap-2">
+    <div class="flex items-center gap-2 font-mono text-[0.65rem] text-[color:var(--on-surface-variant)]">
+      <span class="material-symbols-outlined text-[14px]">schedule</span>
+      <span id="sysclock">SYSTEM_TIME: --:--:--</span>
+    </div>
+    <div class="flex items-center gap-2 font-mono text-[0.65rem] text-[color:var(--on-surface-variant)]">
+      <span class="material-symbols-outlined text-[14px]">memory</span>
+      OS_STATUS: NOMINAL
+    </div>
+  </div>
+</aside>
+
+<script>
+  const links = Array.from(
+    document.querySelectorAll(".sidenav-link"),
+  ) as HTMLAnchorElement[];
+  const sections = links
+    .map((link) => document.getElementById(link.dataset.section || ""))
+    .filter((el): el is HTMLElement => el !== null);
+
+  function setActive(id: string) {
+    links.forEach((link) => {
+      link.classList.toggle("sidenav-link-active", link.dataset.section === id);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive(visible[0].target.id);
+    },
+    { rootMargin: "-40% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  const clock = document.getElementById("sysclock");
+  function tick() {
+    if (!clock) return;
+    const now = new Date();
+    const time = now.toLocaleTimeString("en-GB", { hour12: false });
+    clock.textContent = `SYSTEM_TIME: ${time}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<style>
+  .sidenav-link-active {
+    background: var(--accent-color);
+    color: white;
+    font-weight: 700;
+  }
+
+  .sidenav-link-active .material-symbols-outlined {
+    color: white;
+  }
+</style>

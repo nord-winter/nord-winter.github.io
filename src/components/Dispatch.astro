@@ -1,0 +1,102 @@
+---
+import { siteConfig } from "../config";
+const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
+---
+
+{
+  hasPosts && (
+    <section
+      id="log"
+      class="py-8"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <div class="panel-header">
+        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">rss_feed</span>
+        <h2 class="panel-label">Dispatch_Log</h2>
+        <span class="panel-tag ml-auto">{siteConfig.posts.length} Entries</span>
+      </div>
+
+      <div class="module-seam bg-[color:var(--surface-container-lowest)] p-4 flex items-center gap-3 mb-4">
+        <span class="font-mono text-sm text-[color:var(--primary)] whitespace-nowrap">
+          NW:\LOG&gt;
+        </span>
+        <input
+          id="log-filter"
+          type="text"
+          placeholder="FILTER_BY_TITLE_OR_TAG..."
+          class="flex-1 bg-transparent border-none outline-none font-mono text-sm text-[color:var(--on-surface)] placeholder:text-[color:var(--outline)]"
+        />
+        <span class="material-symbols-outlined text-[color:var(--outline)] text-[18px]">search</span>
+      </div>
+
+      <div class="module-seam bg-[color:var(--surface-container-lowest)] overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-[color:var(--outline-variant)] bg-[color:var(--surface-container-low)]">
+              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
+                Date
+              </th>
+              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
+                Title
+              </th>
+              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
+                Tag
+              </th>
+              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)] text-right">
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[color:var(--outline-variant)]">
+            {siteConfig.posts.map((post) => (
+              <tr
+                class="log-row transition-colors"
+                data-title={post.title.toLowerCase()}
+                data-tag={post.tag.toLowerCase()}
+              >
+                <td class="px-5 py-4 font-mono text-xs text-[color:var(--on-surface-variant)] whitespace-nowrap">
+                  {post.date}
+                </td>
+                <td class="px-5 py-4 text-sm text-[color:var(--on-surface)]">{post.title}</td>
+                <td class="px-5 py-4 font-mono text-xs text-[color:var(--secondary)]">{post.tag}</td>
+                <td class="px-5 py-4 font-mono text-xs text-right text-[color:var(--primary)] font-bold">
+                  {post.status}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p id="log-empty" class="hidden px-5 py-6 font-mono text-xs text-[color:var(--secondary)]">
+          No entries match that filter.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  const input = document.getElementById("log-filter") as HTMLInputElement | null;
+  const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>(".log-row"));
+  const empty = document.getElementById("log-empty");
+
+  input?.addEventListener("input", () => {
+    const query = input.value.trim().toLowerCase();
+    let visible = 0;
+    rows.forEach((row) => {
+      const match =
+        !query ||
+        row.dataset.title?.includes(query) ||
+        row.dataset.tag?.includes(query);
+      row.style.display = match ? "" : "none";
+      if (match) visible++;
+    });
+    empty?.classList.toggle("hidden", visible !== 0);
+  });
+</script>
+
+<style>
+  .log-row:hover {
+    background: color-mix(in srgb, var(--primary) 5%, transparent);
+    border-left: 3px solid var(--primary);
+  }
+</style>

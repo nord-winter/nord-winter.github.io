@@ -1,0 +1,72 @@
+---
+import { siteConfig } from "../config";
+---
+
+<div
+  id="boot-loader"
+  class="fixed inset-0 z-[100] bg-[color:var(--background)] flex items-center justify-center"
+  style={`--accent-color: ${siteConfig.accentColor}`}
+>
+  <div class="w-full max-w-sm px-6">
+    <div class="font-mono text-xs text-[color:var(--on-surface-variant)] space-y-1 mb-4" id="boot-lines">
+    </div>
+    <div class="stat-tile-bar">
+      <div class="stat-tile-bar-fill" id="boot-bar" style="width: 0%"></div>
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <style>
+    #boot-loader {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<script>
+  const bootLines = [
+    "INITIALIZING_SYSTEM...",
+    "LOADING_MODULES...",
+    "SYNCING_CONFIG...",
+    "LINK_ESTABLISHED",
+  ];
+
+  const loader = document.getElementById("boot-loader");
+  const linesEl = document.getElementById("boot-lines");
+  const bar = document.getElementById("boot-bar") as HTMLDivElement | null;
+
+  let i = 0;
+  const printInterval = setInterval(() => {
+    if (linesEl && i < bootLines.length) {
+      const line = document.createElement("div");
+      line.textContent = `> ${bootLines[i]}`;
+      linesEl.appendChild(line);
+      i++;
+      if (bar) bar.style.width = `${Math.min(100, (i / bootLines.length) * 100)}%`;
+    } else {
+      clearInterval(printInterval);
+    }
+  }, 220);
+
+  function hideLoader() {
+    if (!loader) return;
+    loader.style.transition = "opacity 0.4s ease";
+    loader.style.opacity = "0";
+    setTimeout(() => loader.remove(), 450);
+  }
+
+  const minDisplay = new Promise((resolve) => setTimeout(resolve, 900));
+  const pageLoad = new Promise((resolve) => {
+    if (document.readyState === "complete") {
+      resolve(null);
+    } else {
+      window.addEventListener("load", () => resolve(null), { once: true });
+    }
+  });
+
+  Promise.all([minDisplay, pageLoad]).then(hideLoader);
+
+  // Hard fallback: never let the loader get stuck on the page.
+  setTimeout(hideLoader, 4000);
+</script>
