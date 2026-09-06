@@ -261,3 +261,77 @@ body {
   background: var(--primary);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 15%, transparent);
 }
+
+/* Shared CRT terminal frame - reused by any component that embeds a
+   monitor-style viewport (Comms channel list, WHO_ARE_U query, etc).
+   Keeping this in one place is what keeps every "terminal" on the
+   site looking like the same physical screen. */
+.terminal-frame {
+  border: 1px solid var(--outline-variant);
+  box-shadow: 2px 2px 0px 0px var(--primary);
+}
+
+.terminal-screen {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.8);
+  border: 7px solid #0a0b0d;
+  border-radius: 22px / 30px;
+}
+
+.terminal-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size:
+    100% 4px,
+    6px 100%;
+}
+
+.terminal-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 4rem rgba(0, 0, 0, 1);
+}
+
+.terminal-glow {
+  color: var(--glow);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--glow) 70%, transparent);
+}
+
+.terminal-dim {
+  font-family: var(--font-mono);
+  color: color-mix(in srgb, var(--glow) 45%, transparent);
+}
+
+.terminal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--glow);
+  color: var(--glow);
+  background: color-mix(in srgb, var(--glow) 8%, transparent);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.terminal-btn:hover {
+  background: var(--glow);
+  color: #05070c;
+}

@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import ActiveProcesses from "../../components/ActiveProcesses.astro";
 import CoreMetrics from "../../components/CoreMetrics.astro";
+import Experience from "../../components/Experience.astro";
+import Education from "../../components/Education.astro";
 import { siteConfig } from "../../config";
 
 export function getStaticPaths() {
@@ -151,4 +153,7 @@ const socialLinks = [
       </div>
     </div>
   </section>
+
+  <Experience />
+  <Education />
 </Layout>

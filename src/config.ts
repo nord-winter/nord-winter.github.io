@@ -69,28 +69,31 @@ export const siteConfig = {
   ],
   projects: [
     {
-      name: "Bidbase",
+      name: "Showcase",
+      slug: "showcase",
       description:
-        "B2B SaaS tender automation platform. Hybrid item matching via sentence transformers + RapidFuzz. Automates parsing of tender specs from Excel/CSV into ERPNext. Built on Frappe framework.",
-      link: "",
+        "Runnable proof of how I build: concurrency patterns in Go, a full observability stack, GCP infra modules, Kubernetes manifests, an AI/RAG pipeline. Clone any piece and run it in minutes, no proprietary code involved.",
+      link: "https://github.com/nord-winter/showcase",
       image: "",
-      skills: ["Go", "Python", "Frappe", "ERPNext", "ML"],
+      skills: ["Go", "Kubernetes", "Terraform", "GCP", "Prometheus"],
     },
     {
-      name: "PocketPrice",
+      name: "Avoid_AI",
+      slug: "avoid-ai",
       description:
-        "Service catalog sync platform for freelancers across multiple marketplaces. Go (Pocketbase), API, sync logic, platform integrations. Vue 3 + Shadcn/Tailwind frontend.",
-      link: "",
+        "Strips AI-writing tells out of every response automatically, no config, no commands. Builds a personal voice profile so output sounds like you instead of a template.",
+      link: "https://github.com/nord-winter/avoid-ai",
       image: "",
-      skills: ["Go", "Vue.js", "Pocketbase", "TypeScript"],
+      skills: ["Node.js", "CLI", "Claude Code"],
     },
     {
-      name: "Moscow Regional Duma Inventory System",
+      name: "Tender_Automation_Platform",
+      slug: "",
       description:
-        "Secure inventory management for government buildings. Interactive floor plans, role-based access control, 1C integration, government-grade data security compliance.",
+        "Turns manual tender paperwork into a few clicks. Matches vendor line items automatically instead of someone doing it by hand, all day, in a spreadsheet.",
       link: "",
       image: "",
-      skills: ["Go", "PostgreSQL", "1C"],
+      skills: ["Go", "Python", "ML"],
     },
   ],
   experience: [

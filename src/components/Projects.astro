@@ -5,10 +5,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 
 {
   hasProjects && (
-    <section
-      id="projects"
-      class="py-8"
-    >
+    <section id="projects" class="py-8">
       <div class="mb-8">
         <span class="inline-block px-3 py-1 bg-[color:var(--primary)] text-white font-mono text-[0.65rem] uppercase tracking-[0.1em] mb-4">
           Module_Registry_v1.2
@@ -17,21 +14,24 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
           Projects_X
         </h2>
         <p class="mt-2 text-sm md:text-base text-[color:var(--on-surface-variant)] max-w-2xl">
-          Shipped systems and side builds, from backend platforms to full-stack tools.
+          A few things I've built. More on request.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {siteConfig.projects.map((project, index) => {
-          const Component = project.link ? "a" : "div";
-          const linkProps = project.link
-            ? {
-                href: project.link,
-                target: "_blank",
-                rel: "noopener noreferrer",
-              }
-            : {};
+          const hasCase = Boolean(project.slug);
+          const hasLink = Boolean(project.link);
+          const isLive = hasCase || hasLink;
+          const href = hasCase ? `/showcase/${project.slug}` : project.link;
+          const cta = hasCase ? "View_Case" : hasLink ? "Access_Terminal" : "Archived";
           const category = project.skills?.[0]?.toUpperCase() ?? "MODULE";
+          const Component = isLive ? "a" : "div";
+          const linkProps = isLive
+            ? hasCase
+              ? { href }
+              : { href, target: "_blank", rel: "noopener noreferrer" }
+            : {};
 
           return (
             <div class="project-card module-seam bg-[color:var(--surface-container-lowest)] overflow-hidden flex flex-col">
@@ -56,38 +56,13 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                   </span>
                 </div>
 
-                <h3 class="mt-2 font-mono text-lg font-semibold text-[color:var(--on-surface)]">
-                  Project_0{index + 1}
+                <h3 class="mt-2 text-lg font-semibold text-[color:var(--on-surface)]">
+                  {project.name.replace(/_/g, " ")}
                 </h3>
-                <span class="font-mono text-[0.65rem] text-[color:var(--secondary)]">
-                  {project.name}
-                </span>
 
-                <div class="mt-4 border-l-2 border-[color:var(--primary)] pl-3">
-                  <span class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--secondary)] block mb-1">
-                    Capabilities_Map
-                  </span>
-                  <p class="text-sm text-[color:var(--on-surface)] leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div class="mt-4 grid grid-cols-2 gap-3">
-                  <div class="bg-[color:var(--surface-container)] p-2.5 border border-[color:var(--outline-variant)]">
-                    <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-                      Stack_Size
-                    </div>
-                    <div class="mt-0.5 font-mono text-xs text-[color:var(--on-surface)]">
-                      {project.skills?.length ?? 0} Modules
-                    </div>
-                  </div>
-                  <div class="bg-[color:var(--surface-container)] p-2.5 border border-[color:var(--outline-variant)]">
-                    <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-                      Status
-                    </div>
-                    <div class="mt-0.5 font-mono text-xs text-[color:var(--on-surface)]">Stable</div>
-                  </div>
-                </div>
+                <p class="mt-3 text-sm text-[color:var(--on-surface-variant)] leading-relaxed flex-1">
+                  {project.description}
+                </p>
 
                 {project.skills && project.skills.length > 0 && (
                   <div class="mt-4 flex flex-wrap gap-1.5">
@@ -100,13 +75,13 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                 <Component
                   {...linkProps}
                   class={`cta-btn mt-5 w-full py-2.5 font-mono text-xs uppercase tracking-[0.08em] flex items-center justify-center gap-2 border transition-colors ${
-                    project.link
+                    isLive
                       ? "border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white"
                       : "border-[color:var(--outline-variant)] text-[color:var(--secondary)] cursor-default"
                   }`}
                 >
-                  {project.link ? "Access_Terminal" : "Archived"}
-                  {project.link && (
+                  {cta}
+                  {isLive && (
                     <span class="material-symbols-outlined text-[16px] cta-chevron">chevron_right</span>
                   )}
                 </Component>

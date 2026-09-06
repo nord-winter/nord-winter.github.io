@@ -63,7 +63,7 @@ const monogram = siteConfig.callsign
     {
       hasExperience && (
         <a
-          href="/#experience"
+          href={`/profile/${siteConfig.slug}#experience`}
           class="nav-tab font-mono text-xs tracking-[0.15em] uppercase text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] transition-colors"
         >
           Experience
@@ -73,7 +73,7 @@ const monogram = siteConfig.callsign
     {
       hasEducation && (
         <a
-          href="/#education"
+          href={`/profile/${siteConfig.slug}#education`}
           class="nav-tab font-mono text-xs tracking-[0.15em] uppercase text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] transition-colors"
         >
           Education

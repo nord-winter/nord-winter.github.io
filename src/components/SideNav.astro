@@ -16,15 +16,21 @@ const items = [
   { id: "hero", label: "Dashboard", icon: "dashboard" },
   { id: "services", label: "Consulting", icon: "handshake" },
   hasProjects && { id: "projects", label: "Capabilities", icon: "extension" },
-  hasExperience && { id: "experience", label: "Mission_Logs", icon: "terminal" },
+  hasExperience && {
+    id: "experience",
+    label: "Mission_Logs",
+    icon: "terminal",
+    href: `/profile/${siteConfig.slug}#experience`,
+  },
   hasEducation && {
     id: "education",
     label: "Training",
     icon: "settings_input_antenna",
+    href: `/profile/${siteConfig.slug}#education`,
   },
   hasPosts && { id: "log", label: "Dispatch", icon: "rss_feed" },
   hasComms && { id: "comms", label: "Comms", icon: "podcasts" },
-].filter(Boolean) as { id: string; label: string; icon: string }[];
+].filter(Boolean) as { id: string; label: string; icon: string; href?: string }[];
 ---
 
 <aside
@@ -52,7 +58,7 @@ const items = [
     {
       items.map((item) => (
         <a
-          href={`/#${item.id}`}
+          href={item.href ?? `/#${item.id}`}
           data-section={item.id}
           class="sidenav-link flex items-center gap-3 px-6 py-3 font-mono text-xs tracking-[0.1em] uppercase text-[color:var(--on-surface-variant)] hover:bg-[color:var(--surface-container)] transition-colors"
         >

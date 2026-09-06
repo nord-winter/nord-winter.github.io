@@ -50,7 +50,7 @@ const hasChannels = channels.length > 0;
         <span class="panel-tag ml-auto">{channels.length} Channels</span>
       </div>
 
-      <div class="archive-card bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6">
+      <div class="terminal-frame bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6">
         <div class="flex items-center justify-between px-1 mb-2">
           <span class="font-mono text-xs text-[color:var(--secondary)]">CH_02 // Select_Channel</span>
           <div class="flex items-center gap-1.5">
@@ -59,9 +59,9 @@ const hasChannels = channels.length > 0;
           </div>
         </div>
 
-        <div class="tv-screen crt-screen relative overflow-hidden">
+        <div class="terminal-screen aspect-[21/9]">
           <div class="relative z-[1] h-full flex flex-col justify-center gap-1 px-6 py-4 md:px-10">
-            <p class="comms-title">&gt; Select_Channel</p>
+            <p class="terminal-glow font-mono text-xs uppercase tracking-[0.06em] mb-3">&gt; Select_Channel</p>
             {channels.map((channel) => (
               <a href={channel.href} target="_blank" rel="noopener noreferrer" class="comms-row">
                 <span class="comms-id">[{channel.id}]</span>
@@ -78,52 +78,6 @@ const hasChannels = channels.length > 0;
 }
 
 <style>
-  .archive-card {
-    border: 1px solid var(--outline-variant);
-    box-shadow: 2px 2px 0px 0px var(--primary);
-  }
-
-  .tv-screen {
-    background-color: #000;
-    box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.8);
-    border: 7px solid #0a0b0d;
-    border-radius: 22px / 30px;
-    aspect-ratio: 21 / 9;
-  }
-
-  .crt-screen::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background:
-      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    background-size:
-      100% 4px,
-      6px 100%;
-  }
-
-  .crt-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    box-shadow: inset 0 0 4rem rgba(0, 0, 0, 1);
-  }
-
-  .comms-title {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--glow);
-    text-shadow: 0 0 6px color-mix(in srgb, var(--glow) 70%, transparent);
-    margin-bottom: 0.75rem;
-  }
-
   .comms-row {
     display: flex;
     align-items: baseline;

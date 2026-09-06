@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { siteConfig } from "../../config";
+
+export function getStaticPaths() {
+  return siteConfig.projects
+    .filter((project) => project.slug)
+    .map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout
+  title={`${project.name.replace(/_/g, " ")} // ${siteConfig.callsign}`}
+  description={project.description}
+>
+  <section class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
+    <div class="panel-header">
+      <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">apps</span>
+      <h2 class="panel-label">Case_File</h2>
+      <a
+        href="/#projects"
+        class="panel-tag ml-auto hover:text-[color:var(--primary)] transition-colors inline-flex items-center gap-1"
+      >
+        <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+        Back_To_Showcase
+      </a>
+    </div>
+
+    <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 lg:p-10">
+      <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">
+        Case_File // {project.slug}
+      </span>
+      <h1 class="mt-1 text-2xl md:text-3xl font-bold text-[color:var(--on-surface)]">
+        {project.name.replace(/_/g, " ")}
+      </h1>
+
+      <p class="mt-6 text-[color:var(--on-surface)] leading-relaxed max-w-3xl">
+        {project.description}
+      </p>
+
+      {project.skills && project.skills.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-2">
+          {project.skills.map((skill: string) => <span class="chip">[ {skill} ]</span>)}
+        </div>
+      )}
+
+      {project.link && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-8 inline-flex items-center gap-2 py-2.5 px-5 font-mono text-xs uppercase tracking-[0.08em] border border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white transition-colors"
+        >
+          Open_Repository
+          <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+      )}
+
+      <p class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] font-mono text-xs text-[color:var(--secondary)]">
+        Full write-up in progress. Ask directly for the details that matter to you.
+      </p>
+    </div>
+  </section>
+</Layout>
