@@ -60,7 +60,7 @@ const hasChannels = channels.length > 0;
         </div>
 
         <div class="tv-screen crt-screen relative overflow-hidden">
-          <div class="relative z-[1] h-full flex flex-col justify-center gap-1 px-6 py-8 md:px-10">
+          <div class="relative z-[1] h-full flex flex-col justify-center gap-1 px-6 py-4 md:px-10">
             <p class="comms-title">&gt; Select_Channel</p>
             {channels.map((channel) => (
               <a href={channel.href} target="_blank" rel="noopener noreferrer" class="comms-row">
@@ -88,7 +88,7 @@ const hasChannels = channels.length > 0;
     box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.8);
     border: 7px solid #0a0b0d;
     border-radius: 22px / 30px;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 21 / 9;
   }
 
   .crt-screen::before {

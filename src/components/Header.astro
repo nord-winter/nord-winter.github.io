@@ -45,10 +45,10 @@ const monogram = siteConfig.callsign
 
   <nav class="flex items-center gap-8">
     <a
-      href="/#about"
+      href={`/profile/${siteConfig.slug}`}
       class="nav-tab font-mono text-xs tracking-[0.15em] uppercase text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] transition-colors"
     >
-      About
+      Meet_Me
     </a>
     {
       hasProjects && (
@@ -56,7 +56,7 @@ const monogram = siteConfig.callsign
           href="/#projects"
           class="nav-tab font-mono text-xs tracking-[0.15em] uppercase text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] transition-colors"
         >
-          Projects
+          Showcase
         </a>
       )
     }

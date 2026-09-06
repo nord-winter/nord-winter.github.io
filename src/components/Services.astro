@@ -1,0 +1,174 @@
+---
+import { siteConfig } from "../config";
+
+const mailBase = `mailto:${siteConfig.social.email}`;
+
+const services = [
+  {
+    unit: "UNIT-S1 // COST",
+    name: "Infrastructure_Cost_Audit",
+    pitch:
+      "Cut cloud spend 40% by automating VM lifecycle and rightsizing compute on GCP. I find the same waste in your bill and fix it.",
+    proofLabel: "Proven_Result",
+    proofValue: "40% Reduction",
+    cta: "Request_Audit",
+    href: `${mailBase}?subject=${encodeURIComponent("Infrastructure Cost Audit")}`,
+  },
+  {
+    unit: "UNIT-S2 // SCALE",
+    name: "High_Load_Architecture_Review",
+    pitch:
+      "Built and operated systems sustaining 80K+ RPS in production. I stress-test your architecture before your users do.",
+    proofLabel: "Proven_Result",
+    proofValue: "80K+ RPS",
+    cta: "Book_Review",
+    href: `${mailBase}?subject=${encodeURIComponent("Architecture Review")}`,
+  },
+  {
+    unit: "UNIT-S3 // SRE",
+    name: "Platform_Reliability_Setup",
+    pitch:
+      "Maintained 97% uptime across production services with k6 and Grafana observability. I build the same guardrails for your stack.",
+    proofLabel: "Proven_Result",
+    proofValue: "97% Uptime",
+    cta: "Start_Consultation",
+    href: `${mailBase}?subject=${encodeURIComponent("Platform Reliability Consultation")}`,
+  },
+];
+
+const whoami = [
+  {
+    id: "client",
+    label: "Client",
+    line: "> Got infrastructure pain, or need a fresh build. Let's talk specifics.",
+    ctaLabel: "Request_Consultation",
+    href: `${mailBase}?subject=${encodeURIComponent("Consultation Request")}`,
+  },
+  {
+    id: "employer",
+    label: "Employer",
+    line: "> Hiring for Platform, Backend or SRE. Full track record below.",
+    ctaLabel: "View_Operator_Profile",
+    href: `/profile/${siteConfig.slug}`,
+  },
+  {
+    id: "curious",
+    label: "Just_Looking",
+    line: "> No pressure. Latest posts and drops live in the dispatch log.",
+    ctaLabel: "Open_Dispatch",
+    href: "/#log",
+  },
+];
+---
+
+<section id="services" class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
+  <div class="panel-header">
+    <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">handshake</span>
+    <h2 class="panel-label">Consultation_Services</h2>
+    <span class="panel-tag ml-auto">3 Offers</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {
+      services.map((service) => (
+        <div class="service-card module-seam bg-[color:var(--surface-container-lowest)] p-5 flex flex-col transition-transform duration-150">
+          <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">{service.unit}</span>
+          <h3 class="mt-1 text-lg font-semibold text-[color:var(--on-surface)]">
+            {service.name.replace(/_/g, " ")}
+          </h3>
+          <p class="mt-3 text-sm text-[color:var(--on-surface-variant)] leading-relaxed flex-1">
+            {service.pitch}
+          </p>
+          <div class="mt-4 bg-[color:var(--surface-container)] border border-[color:var(--outline-variant)] p-2.5">
+            <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
+              {service.proofLabel}
+            </div>
+            <div class="mt-0.5 font-mono text-sm font-bold text-[color:var(--primary)]">
+              {service.proofValue}
+            </div>
+          </div>
+          <a
+            href={service.href}
+            class="mt-4 w-full py-2.5 text-center font-mono text-xs uppercase tracking-[0.08em] border border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white transition-colors"
+          >
+            {service.cta}
+          </a>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-4 module-seam bg-[color:var(--surface-container-lowest)] p-5 md:p-6">
+    <p class="font-mono text-sm text-[color:var(--primary)]">WHO_ARE_U?</p>
+    <div class="mt-3 flex flex-wrap gap-2">
+      {
+        whoami.map((option) => (
+          <button type="button" data-whoami={option.id} class="whoami-chip">
+            [ {option.label.toUpperCase()} ]
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      whoami.map((option) => (
+        <div data-whoami-response={option.id} class="whoami-response hidden mt-4">
+          <p class="font-mono text-sm text-[color:var(--on-surface)]">{option.line}</p>
+          <a
+            href={option.href}
+            class="mt-3 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--primary)] hover:underline"
+          >
+            {option.ctaLabel}
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>("[data-whoami]");
+  const responses = document.querySelectorAll<HTMLElement>("[data-whoami-response]");
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const id = chip.dataset.whoami;
+      chips.forEach((c) => c.classList.toggle("whoami-chip-active", c === chip));
+      responses.forEach((r) => {
+        r.classList.toggle("hidden", r.dataset.whoamiResponse !== id);
+      });
+    });
+  });
+</script>
+
+<style>
+  .service-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .whoami-chip {
+    padding: 0.4rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--outline-variant);
+    color: var(--on-surface-variant);
+    background: var(--surface-container-low);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .whoami-chip:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .whoami-chip-active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
+  }
+</style>

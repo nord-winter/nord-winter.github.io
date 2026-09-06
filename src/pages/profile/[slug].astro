@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import ActiveProcesses from "../../components/ActiveProcesses.astro";
+import CoreMetrics from "../../components/CoreMetrics.astro";
 import { siteConfig } from "../../config";
 
 export function getStaticPaths() {
@@ -111,6 +113,11 @@ const socialLinks = [
 
       <div class="mt-6 flex flex-wrap gap-2">
         {siteConfig.skills.map((skill) => <span class="chip">[ {skill} ]</span>)}
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] space-y-4">
+        <ActiveProcesses />
+        <CoreMetrics />
       </div>
 
       <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)]">
