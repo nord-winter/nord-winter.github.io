@@ -41,7 +41,7 @@ const metrics = liveMetrics ?? siteConfig.metrics;
 const isLive = liveMetrics !== null;
 ---
 
-<div class="md:col-span-12 module-seam bg-white p-6 lg:p-8">
+<div class="md:col-span-12 module-seam bg-[color:var(--surface-container-lowest)] p-6 lg:p-8">
   <div class="panel-header">
     <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">query_stats</span>
     <h2 class="panel-label">Core_Metrics // Repo_Telemetry</h2>
@@ -57,10 +57,10 @@ const isLive = liveMetrics !== null;
         {metrics[0].value}
       </div>
       <div class="mt-4 h-10 flex items-end gap-1">
-        <div class="w-full bg-[rgba(0,82,155,0.2)] h-[40%]" />
-        <div class="w-full bg-[rgba(0,82,155,0.4)] h-[55%]" />
-        <div class="w-full bg-[rgba(0,82,155,0.6)] h-[70%]" />
-        <div class="w-full bg-[rgba(0,82,155,0.8)] h-[85%]" />
+        <div class="w-full bg-[color-mix(in_srgb,var(--primary)_20%,transparent)] h-[40%]" />
+        <div class="w-full bg-[color-mix(in_srgb,var(--primary)_40%,transparent)] h-[55%]" />
+        <div class="w-full bg-[color-mix(in_srgb,var(--primary)_60%,transparent)] h-[70%]" />
+        <div class="w-full bg-[color-mix(in_srgb,var(--primary)_80%,transparent)] h-[85%]" />
         <div class="w-full bg-[color:var(--primary)] h-[99%]" />
       </div>
     </div>

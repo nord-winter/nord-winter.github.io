@@ -1,11 +1,10 @@
 ---
-import { siteConfig } from "../config";
 import SystemOverview from "./SystemOverview.astro";
 import ActiveProcesses from "./ActiveProcesses.astro";
 import CoreMetrics from "./CoreMetrics.astro";
 ---
 
-<section id="about" class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
+<section id="about" class="py-8">
   <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
     <SystemOverview />
     <ActiveProcesses />

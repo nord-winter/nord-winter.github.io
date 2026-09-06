@@ -24,7 +24,6 @@ const nameUpper = siteConfig.name.toUpperCase().replace(/ /g, "_");
 <aside
   id="sidenav"
   class="hidden lg:flex flex-col fixed left-0 top-0 h-full w-64 bg-[color:var(--surface-container-low)] border-r border-[color:var(--outline-variant)] pt-24 pb-8 z-40"
-  style={`--accent-color: ${siteConfig.accentColor}`}
 >
   <div class="mb-8 px-6">
     <div class="font-mono text-base font-semibold text-[color:var(--primary)] mb-1">
@@ -109,7 +108,7 @@ const nameUpper = siteConfig.name.toUpperCase().replace(/ /g, "_");
 
 <style>
   .sidenav-link-active {
-    background: var(--accent-color);
+    background: var(--primary);
     color: white;
     font-weight: 700;
   }

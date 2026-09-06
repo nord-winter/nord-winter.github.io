@@ -1,0 +1,168 @@
+---
+---
+
+<div class="theme-toggle-wrap">
+  <button
+    id="theme-toggle"
+    type="button"
+    class="theme-toggle"
+    aria-label="Switch side"
+    aria-pressed="false"
+  >
+    <span id="theme-toggle-label" class="font-mono text-[0.6rem] uppercase tracking-[0.08em] text-[color:var(--on-surface-variant)]">
+      Side: Blue
+    </span>
+    <span class="theme-toggle-track">
+      <span class="theme-toggle-thumb"></span>
+    </span>
+  </button>
+  <span id="theme-hint" class="theme-hint font-mono text-[0.6rem] uppercase tracking-[0.05em]" hidden>
+    Switch_Side
+  </span>
+</div>
+
+<script>
+  const STORAGE_KEY = "nw_theme";
+  const HINT_KEY = "nw_theme_hint_seen";
+
+  const toggle = document.getElementById("theme-toggle");
+  const label = document.getElementById("theme-toggle-label");
+  const hint = document.getElementById("theme-hint");
+  const root = document.documentElement;
+
+  function isRed() {
+    return root.dataset.theme === "red";
+  }
+
+  function render() {
+    const red = isRed();
+    if (label) label.textContent = red ? "Side: Red" : "Side: Blue";
+    toggle?.setAttribute("aria-pressed", String(red));
+    toggle?.classList.toggle("theme-toggle-on", red);
+  }
+
+  function setTheme(red: boolean) {
+    if (red) {
+      root.dataset.theme = "red";
+    } else {
+      delete root.dataset.theme;
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, red ? "red" : "blue");
+    } catch {}
+    render();
+  }
+
+  toggle?.addEventListener("click", () => {
+    setTheme(!isRed());
+    dismissHint();
+  });
+
+  render();
+
+  function dismissHint() {
+    if (!hint) return;
+    hint.hidden = true;
+    try {
+      localStorage.setItem(HINT_KEY, "1");
+    } catch {}
+  }
+
+  try {
+    const seen = localStorage.getItem(HINT_KEY);
+    if (!seen && hint) {
+      hint.hidden = false;
+      toggle?.classList.add("theme-toggle-hint");
+      setTimeout(dismissHint, 6000);
+    }
+  } catch {}
+</script>
+
+<style>
+  .theme-toggle-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--outline-variant);
+    border-radius: 999px;
+    background: var(--surface-container-low);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--primary);
+  }
+
+  .theme-toggle-track {
+    position: relative;
+    width: 30px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--outline-variant);
+    transition: background-color 0.2s ease;
+  }
+
+  .theme-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 4px 1px color-mix(in srgb, var(--glow) 70%, transparent);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .theme-toggle-on .theme-toggle-track {
+    background: color-mix(in srgb, var(--primary) 35%, var(--outline-variant));
+  }
+
+  .theme-toggle-on .theme-toggle-thumb {
+    transform: translateX(14px);
+  }
+
+  .theme-toggle-hint {
+    animation: theme-toggle-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes theme-toggle-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 45%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 0%, transparent);
+    }
+  }
+
+  .theme-hint {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    padding: 0.3rem 0.6rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    z-index: 20;
+  }
+
+  .theme-hint::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 10px;
+    border: 4px solid transparent;
+    border-bottom-color: var(--primary);
+  }
+</style>

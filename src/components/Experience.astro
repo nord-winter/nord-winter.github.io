@@ -8,7 +8,6 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
     <section
       id="experience"
       class="py-8"
-      style={`--accent-color: ${siteConfig.accentColor}`}
     >
       <div class="panel-header">
         <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">terminal</span>
@@ -27,7 +26,7 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
             </div>
 
             <div class="pb-6 flex-1 min-w-0">
-              <div class="module-seam bg-white p-5">
+              <div class="module-seam bg-[color:var(--surface-container-lowest)] p-5">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-1">
                   <div>
                     <h3 class="text-base font-semibold text-[color:var(--on-surface)]">

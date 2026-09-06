@@ -25,7 +25,7 @@ const skillRows = siteConfig.skills.map((skill, index) => ({
   <div class="space-y-1">
     {
       skillRows.map((row) => (
-        <div class="group hover:bg-white p-3 border border-transparent hover:module-seam transition-all">
+        <div class="group hover:bg-[color:var(--surface-container-lowest)] p-3 border border-transparent hover:module-seam transition-all">
           <div class="flex justify-between items-center mb-1">
             <span class="font-mono text-sm text-[color:var(--on-surface)]">{row.skill}</span>
             <span class={`w-2 h-2 rounded-full ${row.dot} status-blink`} />

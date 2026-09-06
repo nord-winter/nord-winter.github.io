@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../config";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
@@ -15,17 +16,16 @@ const monogram = siteConfig.callsign
 
 <header
   id="header"
-  class="fixed top-0 left-0 right-0 z-50 hidden md:flex justify-between items-center px-6 lg:px-12 h-16 bg-white/90 backdrop-blur-md border-b border-[color:var(--outline-variant)]"
-  style={`--accent-color: ${siteConfig.accentColor}`}
+  class="fixed top-0 left-0 right-0 z-50 hidden md:flex justify-between items-center px-6 lg:px-12 h-16 header-surface backdrop-blur-md border-b border-[color:var(--outline-variant)]"
 >
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 text-[color:var(--primary)]">
     <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
       <circle
         cx="14"
         cy="14"
         r="12.5"
         fill="none"
-        stroke={siteConfig.accentColor}
+        stroke="currentColor"
         stroke-width="1.5"
       />
       <text
@@ -35,7 +35,7 @@ const monogram = siteConfig.callsign
         font-family="JetBrains Mono, monospace"
         font-size="10"
         font-weight="700"
-        fill={siteConfig.accentColor}>{monogram}</text
+        fill="currentColor">{monogram}</text
       >
     </svg>
     <span class="font-mono text-lg font-bold tracking-tighter text-[color:var(--primary)]">
@@ -93,6 +93,7 @@ const monogram = siteConfig.callsign
   </nav>
 
   <div class="flex items-center gap-4">
+    <ThemeToggle />
     <span class="material-symbols-outlined text-[20px] text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] cursor-pointer transition-colors">
       settings_input_component
     </span>
@@ -115,7 +116,7 @@ const monogram = siteConfig.callsign
     right: 100%;
     bottom: 0;
     height: 2px;
-    background: var(--accent-color);
+    background: var(--primary);
     transition: right 0.2s ease;
   }
 

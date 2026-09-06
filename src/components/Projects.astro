@@ -8,7 +8,6 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
     <section
       id="projects"
       class="py-8"
-      style={`--accent-color: ${siteConfig.accentColor}`}
     >
       <div class="mb-8">
         <span class="inline-block px-3 py-1 bg-[color:var(--primary)] text-white font-mono text-[0.65rem] uppercase tracking-[0.1em] mb-4">
@@ -35,7 +34,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
           const category = project.skills?.[0]?.toUpperCase() ?? "MODULE";
 
           return (
-            <div class="project-card module-seam bg-white overflow-hidden flex flex-col">
+            <div class="project-card module-seam bg-[color:var(--surface-container-lowest)] overflow-hidden flex flex-col">
               {project.image && (
                 <div class="aspect-video overflow-hidden border-b border-[color:var(--outline-variant)] bg-[color:var(--surface-container-low)]">
                   <img
@@ -131,7 +130,7 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
   .project-card:hover {
     transform: translateY(-2px);
     border-color: var(--primary);
-    background-color: rgba(0, 82, 155, 0.025);
+    background-color: color-mix(in srgb, var(--primary) 2.5%, transparent);
   }
 
   .cta-chevron {

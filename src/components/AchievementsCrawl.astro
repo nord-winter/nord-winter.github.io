@@ -17,7 +17,6 @@ const logLines = siteConfig.achievements.map((line) => `> ${line}`);
     <section
       id="archive"
       class="py-8"
-      style={`--accent-color: ${siteConfig.accentColor}`}
     >
       <div class="panel-header">
         <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">live_tv</span>
@@ -153,10 +152,10 @@ const logLines = siteConfig.achievements.map((line) => `> ${line}`);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #6fb4ff;
+    color: var(--glow);
     text-shadow:
-      0 0 6px rgba(79, 168, 255, 0.85),
-      0 0 2px rgba(79, 168, 255, 0.5);
+      0 0 6px color-mix(in srgb, var(--glow) 85%, transparent),
+      0 0 2px color-mix(in srgb, var(--glow) 50%, transparent);
   }
 
   .toggle {

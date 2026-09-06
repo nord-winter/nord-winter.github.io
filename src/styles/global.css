@@ -22,6 +22,28 @@
   --secondary: #585f68;
   --inverse-surface: #2e3036;
   --error: #ba1a1a;
+  --glow: #4fa8ff;
+}
+
+/* Red/dark side - same structure, different palette. Toggled via [data-theme] on <html>. */
+:root[data-theme="red"] {
+  --background: #0c0707;
+  --surface: #120909;
+  --surface-dim: #2a1414;
+  --surface-container-lowest: #170a0a;
+  --surface-container-low: #1c0d0d;
+  --surface-container: #241010;
+  --surface-container-high: #2c1414;
+  --on-surface: #f3e6e6;
+  --on-surface-variant: #c9a3a3;
+  --outline: #7a4a4a;
+  --outline-variant: #3d1c1c;
+  --primary: #e0393f;
+  --on-primary: #ffffff;
+  --secondary: #9c7373;
+  --inverse-surface: #f3e6e6;
+  --error: #f59e0b;
+  --glow: #ff5c5c;
 }
 
 html {
@@ -50,6 +72,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.header-surface {
+  background-color: color-mix(in srgb, var(--surface-container-lowest) 90%, transparent);
+}
+
 /* Dotted grid overlay */
 .grid-overlay {
   background-image: radial-gradient(var(--outline) 1px, transparent 1px);
@@ -63,9 +89,9 @@ body {
   height: 100px;
   background: linear-gradient(
     0deg,
-    rgba(0, 82, 155, 0) 0%,
-    rgba(0, 82, 155, 0.06) 50%,
-    rgba(0, 82, 155, 0) 100%
+    color-mix(in srgb, var(--primary) 0%, transparent) 0%,
+    color-mix(in srgb, var(--primary) 6%, transparent) 50%,
+    color-mix(in srgb, var(--primary) 0%, transparent) 100%
   );
   position: fixed;
   top: -100px;
@@ -195,7 +221,7 @@ body {
 .stat-tile {
   border: 1px solid var(--outline-variant);
   background: var(--surface-container-low);
-  border-top: 2px solid rgba(0, 82, 155, 0.2);
+  border-top: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
   padding: 0.85rem 1rem;
 }
 
@@ -233,5 +259,5 @@ body {
 
 .glow-dot {
   background: var(--primary);
-  box-shadow: 0 0 0 4px rgba(0, 82, 155, 0.15);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 15%, transparent);
 }
