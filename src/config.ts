@@ -8,7 +8,7 @@ export const siteConfig = {
   accentColor: "#00529b",
   social: {
     email: "vladsimutin@gmail.com",
-    linkedin: "https://linkedin.com/in/vladislav-simutin",
+    linkedin: "https://www.linkedin.com/in/vladislav-simutin/",
     twitter: "",
     github: "https://github.com/nord-winter",
     telegramChannel: "https://t.me/n0lltxt",
@@ -178,5 +178,12 @@ export const siteConfig = {
         "GCP core services: Cloud Run, GKE, Cloud Functions, Cloud SQL, Storage, Terraform",
       ],
     },
+  ],
+  certifications: [
+    { name: "SEC0", issuer: "TryHackMe", year: "2026" },
+    { name: "Google Cloud Professional Developer", issuer: "Google Cloud", year: "2025" },
+    { name: "Technical & Information Security", issuer: "Cisco Networking Academy", year: "2023" },
+    { name: "Software Design Patterns", issuer: "Udemy", year: "2023" },
+    { name: "CTF PHDays 2019, Top 3", issuer: "Positive Technologies", year: "2019" },
   ],
 };
