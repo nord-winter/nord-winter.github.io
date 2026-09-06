@@ -42,8 +42,15 @@ const year = new Date().getFullYear();
   <div class="max-w-6xl mx-auto px-6 lg:px-8 py-10">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
       <div class="flex flex-col gap-4">
-        <h3 class="text-lg font-semibold text-[color:var(--on-surface)]">{siteConfig.name}</h3>
+        <h3 class="font-mono text-lg font-semibold text-[color:var(--on-surface)]">{siteConfig.callsign}</h3>
         <p class="text-sm text-[color:var(--on-surface-variant)]">{siteConfig.title}</p>
+        <a
+          href={`/profile/${siteConfig.slug}`}
+          class="inline-flex items-center gap-1 w-fit font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors"
+        >
+          <span class="material-symbols-outlined text-[15px]">badge</span>
+          View_Full_Profile
+        </a>
         <div class="flex gap-x-5">
           {
             siteConfig.social?.email && (
@@ -117,18 +124,18 @@ const year = new Date().getFullYear();
       </div>
 
       <nav class="flex gap-x-8">
-        <a href="#about" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">About</a>
-        {hasProjects && <a href="#projects" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Projects</a>}
-        {hasExperience && <a href="#experience" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Experience</a>}
-        {hasEducation && <a href="#education" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Education</a>}
-        {hasPosts && <a href="#log" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Blog</a>}
+        <a href="/#about" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">About</a>
+        {hasProjects && <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Projects</a>}
+        {hasExperience && <a href="/#experience" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Experience</a>}
+        {hasEducation && <a href="/#education" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Education</a>}
+        {hasPosts && <a href="/#log" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Blog</a>}
       </nav>
     </div>
   </div>
 
   <div class="border-t border-[color:var(--outline-variant)] py-4 px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-3">
     <div class="font-mono text-xs text-[color:var(--on-surface-variant)]">
-      © {year} {siteConfig.name} // Portfolio_Interface
+      © {year} {siteConfig.callsign} // Portfolio_Interface
     </div>
     <div class="flex gap-8">
       <span class="font-mono text-xs text-[color:var(--secondary)]">Status_Online</span>

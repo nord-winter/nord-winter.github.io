@@ -1,0 +1,179 @@
+---
+import { siteConfig } from "../config";
+
+const ref = "?ref=portfolio";
+
+const channels = [
+  siteConfig.social.telegramChannel && {
+    id: "01",
+    label: "Telegram_Channel",
+    value: siteConfig.social.telegramChannel.replace("https://", ""),
+    href: `${siteConfig.social.telegramChannel}${ref}`,
+    icon: "campaign",
+  },
+  siteConfig.social.telegramPersonal && {
+    id: "02",
+    label: "Telegram_Direct",
+    value: siteConfig.social.telegramPersonal.replace("https://", ""),
+    href: `${siteConfig.social.telegramPersonal}${ref}`,
+    icon: "chat",
+  },
+  siteConfig.social.discord && {
+    id: "03",
+    label: "Discord_Server",
+    value: siteConfig.social.discord.replace("https://", ""),
+    href: `${siteConfig.social.discord}${ref}`,
+    icon: "forum",
+  },
+  siteConfig.social.email && {
+    id: "04",
+    label: "Direct_Email",
+    value: siteConfig.social.email,
+    href: `mailto:${siteConfig.social.email}`,
+    icon: "mail",
+  },
+].filter(Boolean) as { id: string; label: string; value: string; href: string; icon: string }[];
+
+const hasChannels = channels.length > 0;
+---
+
+{
+  hasChannels && (
+    <section
+      id="comms"
+      class="py-8"
+      style={`--accent-color: ${siteConfig.accentColor}`}
+    >
+      <div class="panel-header">
+        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">podcasts</span>
+        <h2 class="panel-label">Comms_Link</h2>
+        <span class="panel-tag ml-auto">{channels.length} Channels</span>
+      </div>
+
+      <div class="archive-card bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6">
+        <div class="flex items-center justify-between px-1 mb-2">
+          <span class="font-mono text-xs text-[color:var(--secondary)]">CH_02 // Select_Channel</span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-green-500 status-blink" />
+            <span class="font-mono text-[0.6rem] text-green-600">Linked</span>
+          </div>
+        </div>
+
+        <div class="tv-screen crt-screen relative overflow-hidden">
+          <div class="relative z-[1] h-full flex flex-col justify-center gap-1 px-6 py-8 md:px-10">
+            <p class="comms-title">&gt; Select_Channel</p>
+            {channels.map((channel) => (
+              <a href={channel.href} target="_blank" rel="noopener noreferrer" class="comms-row">
+                <span class="comms-id">[{channel.id}]</span>
+                <span class="comms-label">{channel.label}</span>
+                <span class="comms-value">{channel.value}</span>
+              </a>
+            ))}
+            <p class="comms-cursor">Awaiting_Input<span class="terminal-cursor" /></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .archive-card {
+    border: 1px solid var(--outline-variant);
+    box-shadow: 2px 2px 0px 0px var(--primary);
+  }
+
+  .tv-screen {
+    background-color: #000;
+    box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.8);
+    border: 7px solid #0a0b0d;
+    border-radius: 22px / 30px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .crt-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size:
+      100% 4px,
+      6px 100%;
+  }
+
+  .crt-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: inset 0 0 4rem rgba(0, 0, 0, 1);
+  }
+
+  .comms-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--glow);
+    text-shadow: 0 0 6px color-mix(in srgb, var(--glow) 70%, transparent);
+    margin-bottom: 0.75rem;
+  }
+
+  .comms-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--glow) 80%, white 10%);
+    text-shadow: 0 0 4px color-mix(in srgb, var(--glow) 55%, transparent);
+    transition:
+      transform 0.1s ease,
+      text-shadow 0.15s ease;
+  }
+
+  .comms-row:hover {
+    transform: translateX(4px);
+    text-shadow:
+      0 0 6px color-mix(in srgb, var(--glow) 90%, transparent),
+      0 0 14px color-mix(in srgb, var(--glow) 50%, transparent);
+  }
+
+  .comms-id {
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .comms-label {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  .comms-value {
+    opacity: 0.6;
+    font-size: 0.72rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .comms-cursor {
+    margin-top: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: color-mix(in srgb, var(--glow) 60%, transparent);
+  }
+
+  .comms-cursor .terminal-cursor::after {
+    color: var(--glow);
+  }
+</style>

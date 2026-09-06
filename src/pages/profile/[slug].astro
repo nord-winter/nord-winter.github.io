@@ -1,0 +1,147 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { siteConfig } from "../../config";
+
+export function getStaticPaths() {
+  // Single operator today. Add more entries here (or swap to a real
+  // profiles collection) once this needs to cover a team.
+  return [{ params: { slug: siteConfig.slug } }];
+}
+
+const monogram = siteConfig.callsign
+  .split("_")
+  .map((word) => word[0])
+  .join("")
+  .toUpperCase();
+
+const socialLinks = [
+  siteConfig.social.email && {
+    label: "Email",
+    href: `mailto:${siteConfig.social.email}`,
+    value: siteConfig.social.email,
+    icon: "mail",
+  },
+  siteConfig.social.linkedin && {
+    label: "LinkedIn",
+    href: siteConfig.social.linkedin,
+    value: siteConfig.social.linkedin.replace("https://", ""),
+    icon: "work",
+  },
+  siteConfig.social.github && {
+    label: "GitHub",
+    href: siteConfig.social.github,
+    value: siteConfig.social.github.replace("https://", ""),
+    icon: "code",
+  },
+  siteConfig.social.telegramChannel && {
+    label: "Telegram_Channel",
+    href: `${siteConfig.social.telegramChannel}?ref=profile`,
+    value: siteConfig.social.telegramChannel.replace("https://", ""),
+    icon: "campaign",
+  },
+  siteConfig.social.telegramPersonal && {
+    label: "Telegram_Direct",
+    href: `${siteConfig.social.telegramPersonal}?ref=profile`,
+    value: siteConfig.social.telegramPersonal.replace("https://", ""),
+    icon: "chat",
+  },
+  siteConfig.social.discord && {
+    label: "Discord",
+    href: `${siteConfig.social.discord}?ref=profile`,
+    value: siteConfig.social.discord.replace("https://", ""),
+    icon: "forum",
+  },
+].filter(Boolean) as { label: string; href: string; value: string; icon: string }[];
+---
+
+<Layout
+  title={`${siteConfig.name} // Operator_Profile`}
+  description={`${siteConfig.name}, ${siteConfig.title}. ${siteConfig.description}`}
+>
+  <section class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
+    <div class="panel-header">
+      <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">badge</span>
+      <h2 class="panel-label">Operator_Profile</h2>
+      <a
+        href="/"
+        class="panel-tag ml-auto hover:text-[color:var(--primary)] transition-colors inline-flex items-center gap-1"
+      >
+        <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+        Back_To_Dashboard
+      </a>
+    </div>
+
+    <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 lg:p-10">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-5 pb-6 border-b border-[color:var(--outline-variant)]">
+        <div class="w-16 h-16 rounded-full border-2 border-[color:var(--primary)] flex items-center justify-center flex-shrink-0">
+          <span class="font-mono text-xl font-bold text-[color:var(--primary)]">{monogram}</span>
+        </div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold text-[color:var(--on-surface)]">
+            {siteConfig.name}
+          </h1>
+          <p class="text-[color:var(--on-surface-variant)]">{siteConfig.title}</p>
+          <span class="mt-1 inline-block font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
+            Callsign: {siteConfig.callsign}
+          </span>
+        </div>
+      </div>
+
+      <p class="mt-6 text-[color:var(--on-surface)] leading-relaxed max-w-3xl">
+        {siteConfig.aboutMe}
+      </p>
+
+      <ul class="mt-6 space-y-3 max-w-3xl">
+        {
+          siteConfig.aboutHighlights.map((highlight) => (
+            <li class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-[color:var(--primary)] text-[18px] mt-0.5">
+                verified
+              </span>
+              <div>
+                <div class="font-mono text-sm font-semibold text-[color:var(--primary)]">
+                  {highlight.label}
+                </div>
+                <p class="text-sm text-[color:var(--on-surface-variant)]">{highlight.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        {siteConfig.skills.map((skill) => <span class="chip">[ {skill} ]</span>)}
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)]">
+        <span class="font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--secondary)]">
+          Connect
+        </span>
+        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 p-3 border border-[color:var(--outline-variant)] hover:border-[color:var(--primary)] transition-colors"
+              >
+                <span class="material-symbols-outlined text-[color:var(--primary)] text-[18px]">
+                  {link.icon}
+                </span>
+                <span class="min-w-0">
+                  <span class="block font-mono text-xs uppercase tracking-[0.05em] text-[color:var(--on-surface)]">
+                    {link.label}
+                  </span>
+                  <span class="block text-xs text-[color:var(--on-surface-variant)] truncate">
+                    {link.value}
+                  </span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

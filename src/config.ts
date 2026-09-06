@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: "Vladislav Simutin",
   callsign: "NORD_WINTER",
+  slug: "nord-winter",
   title: "Platform Engineer",
   description:
     "Portfolio of Vladislav Simutin, Platform Engineer specializing in Go, GCP and Kubernetes",
@@ -10,6 +11,9 @@ export const siteConfig = {
     linkedin: "https://linkedin.com/in/vladislav-simutin",
     twitter: "",
     github: "https://github.com/nord-winter",
+    telegramChannel: "https://t.me/n0lltxt",
+    telegramPersonal: "https://t.me/s1ma_out",
+    discord: "https://discord.gg/ya7fWTXGx",
   },
   aboutMe:
     "Backend and platform engineer with 6+ years across fintech and e-commerce, contributor to open source. Build and operate distributed systems with Go on GCP. Production experience on high-load systems and AI pipelines shipped to production. Open to remote Platform, Backend and SRE roles at Series B/C companies and lean startups.",

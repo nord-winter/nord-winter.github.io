@@ -5,6 +5,12 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
 const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
+const hasComms = Boolean(
+  siteConfig.social.telegramChannel ||
+    siteConfig.social.telegramPersonal ||
+    siteConfig.social.discord ||
+    siteConfig.social.email,
+);
 
 const items = [
   { id: "about", label: "Dashboard", icon: "dashboard" },
@@ -16,9 +22,8 @@ const items = [
     icon: "settings_input_antenna",
   },
   hasPosts && { id: "log", label: "Dispatch", icon: "rss_feed" },
+  hasComms && { id: "comms", label: "Comms", icon: "podcasts" },
 ].filter(Boolean) as { id: string; label: string; icon: string }[];
-
-const nameUpper = siteConfig.name.toUpperCase().replace(/ /g, "_");
 ---
 
 <aside
@@ -27,19 +32,26 @@ const nameUpper = siteConfig.name.toUpperCase().replace(/ /g, "_");
 >
   <div class="mb-8 px-6">
     <div class="font-mono text-base font-semibold text-[color:var(--primary)] mb-1">
-      {nameUpper}
+      {siteConfig.callsign}
     </div>
     <div class="font-mono text-[0.7rem] text-[color:var(--on-surface-variant)] flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-blue-500 status-blink" />
       STATUS: ONLINE
     </div>
+    <a
+      href={`/profile/${siteConfig.slug}`}
+      class="mt-2 inline-flex items-center gap-1 font-mono text-[0.65rem] uppercase tracking-[0.06em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors"
+    >
+      <span class="material-symbols-outlined text-[13px]">badge</span>
+      View_Profile
+    </a>
   </div>
 
   <nav class="space-y-1 flex-grow">
     {
       items.map((item) => (
         <a
-          href={`#${item.id}`}
+          href={`/#${item.id}`}
           data-section={item.id}
           class="sidenav-link flex items-center gap-3 px-6 py-3 font-mono text-xs tracking-[0.1em] uppercase text-[color:var(--on-surface-variant)] hover:bg-[color:var(--surface-container)] transition-colors"
         >
