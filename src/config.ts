@@ -98,7 +98,7 @@ export const siteConfig = {
   ],
   experience: [
     {
-      company: "Ascender",
+      company: "AdTech & Affiliate Marketing Platform",
       title: "Principal Backend Engineer",
       location: "Bangkok, Thailand",
       dateRange: "Feb 2024 - Jan 2026",
@@ -124,7 +124,7 @@ export const siteConfig = {
       ],
     },
     {
-      company: "BRLab / Metaratings",
+      company: "Ratings & Comparison Platform",
       title: "Senior Backend Engineer",
       location: "Russia / United Kingdom",
       dateRange: "Sep 2021 - Aug 2023",
@@ -138,7 +138,7 @@ export const siteConfig = {
       tech: ["Go", "gRPC", "PHP", "Kafka", "PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "Docker", "Kubernetes"],
     },
     {
-      company: "D-GRUPP Holding",
+      company: "Digital Commerce Holding",
       title: "Full Stack Developer",
       location: "Moscow, Russia",
       dateRange: "Aug 2020 - Sep 2021",
