@@ -76,7 +76,12 @@ const contactEmail = siteConfig.social.email;
     }
   </div>
 
-  <div id="whoami-terminal" class="mt-4 terminal-frame bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6">
+  <p class="mt-6 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--primary)] flex items-center gap-1.5">
+    <span class="material-symbols-outlined text-[16px]">bolt</span>
+    Fastest_Way_To_Reach_Me
+  </p>
+
+  <div id="whoami-terminal" class="mt-2 whoami-highlight terminal-frame bg-[color:var(--surface-container-lowest)] rounded p-5 md:p-6">
     <div class="flex items-center justify-between px-1 mb-2">
       <span class="font-mono text-xs text-[color:var(--secondary)]">CH_03 // Visitor_Interview</span>
       <div class="flex items-center gap-1.5">
@@ -247,6 +252,12 @@ const contactEmail = siteConfig.social.email;
   .service-card:hover {
     transform: translateY(-2px);
     border-color: var(--primary);
+  }
+
+  .whoami-highlight {
+    box-shadow:
+      3px 3px 0px 0px var(--primary),
+      0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent);
   }
 
   .whoami-screen {
