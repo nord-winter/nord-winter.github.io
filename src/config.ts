@@ -27,6 +27,12 @@ export const siteConfig = {
       text: "RAG pipelines and AI agents in production, vLLM, Qdrant, MCP servers and GenKit, from vector search to end-to-end automation.",
     },
   ],
+  manifesto: [
+    "I don't ship a service and walk away. If it's mine to build, it's mine to be on call for, mine to explain when the bill doubles, mine to fix when it gets slow under real traffic.",
+    "Most outages aren't caused by a hard problem. They're caused by complexity nobody accounted for. I'd rather ship something boring that holds under load than something clever that only survives the demo.",
+    "I use AI tools the way I use any other tool, to move faster through the parts of the job that don't need me, so there's more time left for the parts that do. It doesn't decide what gets built or why.",
+    "Everything on this site is work I actually did. If a number looks interesting, ask me about it, I can walk you through exactly how it happened.",
+  ],
   metrics: [
     { label: "UPTIME", value: "97%" },
     { label: "COST_CUT", value: "40%" },
@@ -49,10 +55,28 @@ export const siteConfig = {
   ],
   posts: [
     {
-      date: "2026-08-09",
-      title: "Blog and update log coming soon",
-      tag: "META",
+      date: "2026-08-28",
+      title: "What actually breaks when you autoscale GKE past 50 nodes",
+      tag: "GCP",
+      status: "DRAFT",
+    },
+    {
+      date: "2026-08-14",
+      title: "Terraform modules I reuse on every new infra project",
+      tag: "TERRAFORM",
+      status: "DRAFT",
+    },
+    {
+      date: "2026-07-30",
+      title: "Wiring a RAG pipeline into a production sales flow, notes from doing it twice",
+      tag: "AI",
       status: "PLANNED",
+    },
+    {
+      date: "2026-07-09",
+      title: "Site build log: why this dashboard exists and what it's for",
+      tag: "META",
+      status: "PUBLISHED",
     },
   ],
   skills: [

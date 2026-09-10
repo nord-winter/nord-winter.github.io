@@ -69,7 +69,6 @@ const hasChannels = channels.length > 0;
                 <span class="comms-value">{channel.value}</span>
               </a>
             ))}
-            <p class="comms-cursor">Awaiting_Input<span class="terminal-cursor" /></p>
           </div>
         </div>
       </div>
@@ -118,16 +117,4 @@ const hasChannels = channels.length > 0;
     white-space: nowrap;
   }
 
-  .comms-cursor {
-    margin-top: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: color-mix(in srgb, var(--glow) 60%, transparent);
-  }
-
-  .comms-cursor .terminal-cursor::after {
-    color: var(--glow);
-  }
 </style>

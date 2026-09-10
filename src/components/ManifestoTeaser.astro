@@ -1,21 +1,27 @@
 ---
 import { siteConfig } from "../config";
+const hasManifesto = siteConfig.manifesto && siteConfig.manifesto.length > 0;
 ---
 
-<section id="manifesto" class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
-  <div class="panel-header">
-    <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">history_edu</span>
-    <h2 class="panel-label">Manifesto</h2>
-    <span class="panel-tag ml-auto">Draft_In_Progress</span>
-  </div>
+{
+  hasManifesto && (
+    <section id="manifesto" class="py-8">
+      <div class="panel-header">
+        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">history_edu</span>
+        <h2 class="panel-label">Manifesto</h2>
+        <span class="panel-tag ml-auto">{siteConfig.manifesto.length} Entries</span>
+      </div>
 
-  <div class="module-seam bg-[color:var(--surface-container-lowest)] p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-    <p class="text-sm text-[color:var(--on-surface-variant)] max-w-xl">
-      A longer statement on how I think about platform work, ownership and building things that hold up under load.
-      Still being written.
-    </p>
-    <span class="flex-shrink-0 font-mono text-[0.65rem] uppercase tracking-[0.06em] text-[color:var(--secondary)] border border-[color:var(--outline-variant)] px-3 py-1.5">
-      Coming_Soon
-    </span>
-  </div>
-</section>
+      <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 md:p-8">
+        <div class="max-w-2xl space-y-4">
+          {siteConfig.manifesto.map((line, i) => (
+            <p class="text-sm md:text-base text-[color:var(--on-surface-variant)] leading-relaxed">
+              <span class="font-mono text-xs text-[color:var(--primary)] mr-2">{`0${i + 1}.`}</span>
+              {line}
+            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
