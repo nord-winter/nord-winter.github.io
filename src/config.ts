@@ -9,8 +9,8 @@ export const siteConfig = {
   engagement: [
     { label: "Engagement", value: "Freelance / contract, invoiced directly" },
     { label: "Availability", value: "Open to new projects" },
-    { label: "Hours", value: "TODO_TIMEZONE" },
-    { label: "Authorization", value: "TODO_WORK_AUTHORIZATION" },
+    { label: "Hours", value: "On_Request" },
+    { label: "Authorization", value: "On_Request" },
     { label: "Language", value: "English, Russian" },
   ],
   social: {
@@ -99,7 +99,7 @@ export const siteConfig = {
   ],
   rig: {
     intro:
-      "The terminal aesthetic on this site isn't just a theme, it's modeled on what I actually run every day.",
+      "The terminal aesthetic on this site is modeled on my daily driver, not the only system I run, just the one I spend the most time in.",
     stack: [
       { label: "OS", value: "Arch Linux" },
       { label: "Shell", value: "fish" },

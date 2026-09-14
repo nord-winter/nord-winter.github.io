@@ -16,26 +16,28 @@ const rig = siteConfig.rig;
       <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 md:p-8">
         <p class="text-sm text-[color:var(--on-surface-variant)] max-w-2xl">{rig.intro}</p>
 
-        <div class="mt-5 flex flex-wrap gap-2">
-          {rig.stack.map((s) => (
-            <span class="chip">
-              <span class="text-[color:var(--secondary)] mr-1.5">{s.label}:</span>
-              {s.value}
-            </span>
-          ))}
-        </div>
-
         <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
           {rig.items.map((item) => (
-            <figure class="module-seam overflow-hidden bg-[color:var(--surface-container-low)]">
-              <img src={item.image} alt={item.title} class="w-full aspect-video object-cover" loading="lazy" />
-              <figcaption class="p-4">
+            <figure class="module-seam overflow-hidden">
+              <div class="h-56 md:h-72 bg-black flex items-center justify-center">
+                <img src={item.image} alt={item.title} class="max-w-full max-h-full object-contain" loading="lazy" />
+              </div>
+              <figcaption class="p-4 bg-[color:var(--surface-container-low)]">
                 <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
                   {item.title}
                 </div>
                 <p class="text-sm text-[color:var(--on-surface-variant)]">{item.caption}</p>
               </figcaption>
             </figure>
+          ))}
+        </div>
+
+        <div class="mt-5 bg-black text-[#c9d1d9] font-mono text-xs p-4 rounded max-w-md">
+          <p class="text-[color:var(--secondary)] mb-1">// specs</p>
+          {rig.stack.map((s) => (
+            <p>
+              <span class="text-[color:var(--glow)]">{s.label}:</span> {s.value}
+            </p>
           ))}
         </div>
 

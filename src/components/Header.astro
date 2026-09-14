@@ -103,6 +103,103 @@ const monogram = siteConfig.callsign
   </div>
 </header>
 
+<header
+  id="mobile-header"
+  class="fixed top-0 left-0 right-0 z-50 flex md:hidden justify-between items-center px-4 h-16 header-surface backdrop-blur-md border-b border-[color:var(--outline-variant)]"
+>
+  <a href="/" class="flex items-center gap-2 text-[color:var(--primary)]">
+    <svg width="24" height="24" viewBox="0 0 28 28" aria-hidden="true">
+      <circle cx="14" cy="14" r="12.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <text
+        x="14"
+        y="18"
+        text-anchor="middle"
+        font-family="JetBrains Mono, monospace"
+        font-size="10"
+        font-weight="700"
+        fill="currentColor">{monogram}</text
+      >
+    </svg>
+    <span class="font-mono text-sm font-bold tracking-tighter text-[color:var(--primary)]">
+      {siteConfig.callsign}
+    </span>
+  </a>
+  <button
+    id="mobile-nav-toggle"
+    type="button"
+    aria-label="Toggle navigation"
+    aria-expanded="false"
+    class="flex items-center justify-center w-9 h-9 text-[color:var(--on-surface-variant)]"
+  >
+    <span id="mobile-nav-icon" class="material-symbols-outlined text-[24px]">menu</span>
+  </button>
+</header>
+
+<nav
+  id="mobile-nav-panel"
+  class="hidden md:hidden fixed top-16 left-0 right-0 z-40 header-surface backdrop-blur-md border-b border-[color:var(--outline-variant)] px-4 py-4 flex flex-col gap-1"
+>
+  <a
+    href={`/profile/${siteConfig.slug}`}
+    class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
+  >
+    Meet_Me
+  </a>
+  {
+    hasProjects && (
+      <a
+        href="/#projects"
+        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
+      >
+        Showcase
+      </a>
+    )
+  }
+  {
+    hasExperience && (
+      <a
+        href={`/profile/${siteConfig.slug}#experience`}
+        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
+      >
+        Experience
+      </a>
+    )
+  }
+  {
+    hasEducation && (
+      <a
+        href={`/profile/${siteConfig.slug}#education`}
+        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
+      >
+        Education
+      </a>
+    )
+  }
+  {
+    hasPosts && (
+      <a
+        href="/#log"
+        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5"
+      >
+        Blog
+      </a>
+    )
+  }
+</nav>
+
+<script>
+  const toggle = document.getElementById("mobile-nav-toggle");
+  const panel = document.getElementById("mobile-nav-panel");
+  const icon = document.getElementById("mobile-nav-icon");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = !panel?.classList.contains("hidden");
+    panel?.classList.toggle("hidden");
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    if (icon) icon.textContent = isOpen ? "menu" : "close";
+  });
+</script>
+
 <style>
   .nav-tab {
     position: relative;
