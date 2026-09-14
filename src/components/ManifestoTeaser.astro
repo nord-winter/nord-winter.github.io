@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from "../config";
-const hasManifesto = siteConfig.manifesto && siteConfig.manifesto.length > 0;
+const hasManifesto = Boolean(siteConfig.manifesto?.quote);
+const manifesto = siteConfig.manifesto;
 ---
 
 {
@@ -9,18 +10,17 @@ const hasManifesto = siteConfig.manifesto && siteConfig.manifesto.length > 0;
       <div class="panel-header">
         <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">history_edu</span>
         <h2 class="panel-label">Manifesto</h2>
-        <span class="panel-tag ml-auto">{siteConfig.manifesto.length} Entries</span>
+        <span class="panel-tag ml-auto">Placeholder</span>
       </div>
 
       <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 md:p-8">
-        <div class="max-w-2xl space-y-4">
-          {siteConfig.manifesto.map((line, i) => (
-            <p class="text-sm md:text-base text-[color:var(--on-surface-variant)] leading-relaxed">
-              <span class="font-mono text-xs text-[color:var(--primary)] mr-2">{`0${i + 1}.`}</span>
-              {line}
-            </p>
-          ))}
-        </div>
+        <blockquote class="max-w-2xl text-sm md:text-base text-[color:var(--on-surface-variant)] leading-relaxed border-l-2 border-[color:var(--primary)] pl-5">
+          {manifesto.quote}
+        </blockquote>
+        <p class="mt-3 font-mono text-xs text-[color:var(--primary)]">{`- ${manifesto.citation}`}</p>
+        <p class="mt-5 text-xs text-[color:var(--secondary)] max-w-2xl border-t border-[color:var(--outline-variant)] pt-4">
+          {manifesto.note}
+        </p>
       </div>
     </section>
   )

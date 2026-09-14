@@ -27,12 +27,12 @@ export const siteConfig = {
       text: "RAG pipelines and AI agents in production, vLLM, Qdrant, MCP servers and GenKit, from vector search to end-to-end automation.",
     },
   ],
-  manifesto: [
-    "I don't ship a service and walk away. If it's mine to build, it's mine to be on call for, mine to explain when the bill doubles, mine to fix when it gets slow under real traffic.",
-    "Most outages aren't caused by a hard problem. They're caused by complexity nobody accounted for. I'd rather ship something boring that holds under load than something clever that only survives the demo.",
-    "I use AI tools the way I use any other tool, to move faster through the parts of the job that don't need me, so there's more time left for the parts that do. It doesn't decide what gets built or why.",
-    "Everything on this site is work I actually did. If a number looks interesting, ask me about it, I can walk you through exactly how it happened.",
-  ],
+  manifesto: {
+    quote:
+      "This is our world now. The world of the electron and the switch; the beauty of the baud. We make use of a service already existing without paying for what could be dirt-cheap if it wasn't run by profiteering gluttons, and you call us criminals. We explore... and you call us criminals. We seek after knowledge... and you call us criminals. We exist without skin color, without nationality, without religious bias... and you call us criminals. You build atomic bombs, you wage wars, you murder, cheat, and lie to us and try to make us believe it's for our own good, yet we're the criminals. Yes, I am a criminal. My crime is that of curiosity. My crime is that of judging people by what they say and think, not what they look like. My crime is that of outsmarting you, something that you will never forgive me for. I am a hacker, and this is my manifesto. You may stop this individual, but you can't stop us all. After all, we're all alike.",
+    citation: 'The Mentor, "The Conscience of a Hacker," 1986',
+    note: "Placeholder. My own manifesto isn't written yet, this is here as a stand-in while I write it, not a claim on someone else's words.",
+  },
   metrics: [
     { label: "UPTIME", value: "97%" },
     { label: "COST_CUT", value: "40%" },
