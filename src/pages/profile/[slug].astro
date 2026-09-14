@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ActiveProcesses from "../../components/ActiveProcesses.astro";
 import CoreMetrics from "../../components/CoreMetrics.astro";
 import Experience from "../../components/Experience.astro";
 import Education from "../../components/Education.astro";
@@ -118,8 +117,7 @@ const socialLinks = [
         {siteConfig.skills.map((skill) => <span class="chip">[ {skill} ]</span>)}
       </div>
 
-      <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] space-y-4">
-        <ActiveProcesses />
+      <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)]">
         <CoreMetrics />
       </div>
 

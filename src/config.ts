@@ -105,7 +105,7 @@ export const siteConfig = {
       { label: "Shell", value: "fish" },
       { label: "Terminal", value: "kitty" },
       { label: "Theme", value: "Emerald_Black (custom)" },
-      { label: "WM", value: "niri" },
+      { label: "WM", value: "GNOME" },
     ],
     dotfilesUrl: "https://github.com/nord-winter/dotfiles",
     items: [
@@ -121,7 +121,7 @@ export const siteConfig = {
       },
     ],
     extra:
-      "Also running: a Raspberry Pi hosting a self-hosted notes setup with its own automation, kept on a private network, and a couple of NixOS configs for reproducible throwaway environments. Details on request.",
+      "Also running: a Raspberry Pi hosting a self-hosted notes setup with its own automation, kept on a private network, and a couple of NixOS configs for reproducible throwaway environments. Details on request. niri shows up separately in the Cyberdeck project below, that's a gamepad-driven tiling setup, not the daily driver.",
   },
   projects: [
     {
