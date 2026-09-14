@@ -137,6 +137,24 @@ export const siteConfig = {
       skills: ["Node.js", "CLI", "Claude Code"],
     },
     {
+      name: "Cyberdeck",
+      slug: "cyberdeck",
+      description:
+        "A tiling Linux desktop (niri) ported to Nix and driven entirely by a gamepad. No keyboard needed to switch windows, resize, or launch anything, built for a handheld-first workflow.",
+      link: "https://github.com/nord-winter/cyberdeck",
+      image: "",
+      skills: ["Nix", "niri", "Wayland", "Linux"],
+    },
+    {
+      name: "Decky_Mobile_Mode",
+      slug: "decky-mobile-mode",
+      description:
+        "Open source Decky Loader plugin that reflows KDE's desktop mode for touch input, so Steam Deck's desktop UI stops fighting the screen it actually runs on.",
+      link: "https://github.com/nord-winter/decky-mobile-mode",
+      image: "",
+      skills: ["Decky Loader", "KDE Plasma", "SteamOS", "Linux"],
+    },
+    {
       name: "Tender_Automation_Platform",
       slug: "",
       description:
