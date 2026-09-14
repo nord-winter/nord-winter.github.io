@@ -1,0 +1,57 @@
+---
+import { siteConfig } from "../config";
+const hasRig = Boolean(siteConfig.rig && siteConfig.rig.items?.length);
+const rig = siteConfig.rig;
+---
+
+{
+  hasRig && (
+    <section id="rig" class="py-8">
+      <div class="panel-header">
+        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">dns</span>
+        <h2 class="panel-label">Rig_Spec</h2>
+        <span class="panel-tag ml-auto">Local_Setup</span>
+      </div>
+
+      <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6 md:p-8">
+        <p class="text-sm text-[color:var(--on-surface-variant)] max-w-2xl">{rig.intro}</p>
+
+        <div class="mt-5 flex flex-wrap gap-2">
+          {rig.stack.map((s) => (
+            <span class="chip">
+              <span class="text-[color:var(--secondary)] mr-1.5">{s.label}:</span>
+              {s.value}
+            </span>
+          ))}
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {rig.items.map((item) => (
+            <figure class="module-seam overflow-hidden bg-[color:var(--surface-container-low)]">
+              <img src={item.image} alt={item.title} class="w-full aspect-video object-cover" loading="lazy" />
+              <figcaption class="p-4">
+                <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+                  {item.title}
+                </div>
+                <p class="text-sm text-[color:var(--on-surface-variant)]">{item.caption}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <p class="mt-6 text-sm text-[color:var(--on-surface-variant)] max-w-2xl">{rig.extra}</p>
+
+        <a
+          href={rig.dotfilesUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] hover:underline"
+        >
+          <span class="material-symbols-outlined text-[16px]">code</span>
+          View_Dotfiles
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  )
+}

@@ -91,6 +91,32 @@ export const siteConfig = {
     "Prometheus",
     "TypeScript",
   ],
+  rig: {
+    intro:
+      "The terminal aesthetic on this site isn't just a theme, it's modeled on what I actually run every day.",
+    stack: [
+      { label: "OS", value: "Arch Linux" },
+      { label: "Shell", value: "fish" },
+      { label: "Terminal", value: "kitty" },
+      { label: "Theme", value: "Emerald_Black (custom)" },
+      { label: "WM", value: "TODO_WM_NAME" },
+    ],
+    dotfilesUrl: "https://github.com/nord-winter/dotfiles",
+    items: [
+      {
+        title: "Terminal",
+        image: "/rig/terminal.png",
+        caption: "kitty + fish, fastfetch on launch, custom Emerald_Black theme.",
+      },
+      {
+        title: "Desktop",
+        image: "/rig/desktop.png",
+        caption: "Daily driver desktop, dock and workspace layout tuned for keyboard-first switching.",
+      },
+    ],
+    extra:
+      "Also running: a Raspberry Pi hosting a self-hosted notes setup with its own automation, kept on a private network, and a couple of NixOS configs for reproducible throwaway environments. Details on request.",
+  },
   projects: [
     {
       name: "Showcase",
