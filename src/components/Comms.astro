@@ -59,8 +59,8 @@ const hasChannels = channels.length > 0;
           </div>
         </div>
 
-        <div class="terminal-screen aspect-[21/9]">
-          <div class="relative z-[1] h-full flex flex-col justify-center gap-1 px-6 py-4 md:px-10">
+        <div class="terminal-screen comms-screen">
+          <div class="relative z-[1] w-full flex flex-col justify-center gap-1 px-6 py-6 md:px-10">
             <p class="terminal-glow font-mono text-xs uppercase tracking-[0.06em] mb-3">&gt; Select_Channel</p>
             {channels.map((channel) => (
               <a href={channel.href} target="_blank" rel="noopener noreferrer" class="comms-row">
@@ -77,6 +77,18 @@ const hasChannels = channels.length > 0;
 }
 
 <style>
+  .comms-screen {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .comms-screen {
+      min-height: 260px;
+    }
+  }
+
   .comms-row {
     display: flex;
     align-items: baseline;

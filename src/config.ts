@@ -99,9 +99,9 @@ export const siteConfig = {
   ],
   rig: {
     intro:
-      "The terminal aesthetic on this site is modeled on my daily driver, not the only system I run, just the one I spend the most time in.",
+      "The terminal aesthetic on this site is modeled on my most common setup, not the only one I run.",
     stack: [
-      { label: "OS", value: "Arch Linux" },
+      { label: "OS", value: "NixOS / Qubes OS" },
       { label: "Shell", value: "fish" },
       { label: "Terminal", value: "kitty" },
       { label: "Theme", value: "Emerald_Black (custom)" },
@@ -150,6 +150,20 @@ export const siteConfig = {
       link: "https://github.com/nord-winter/cyberdeck",
       image: "",
       skills: ["Nix", "niri", "Wayland", "Linux"],
+      caseStudy: [
+        {
+          heading: "The_Problem",
+          text: "A tiling window manager is built around keyboard shortcuts. Take the keyboard away, hand someone a gamepad instead, and the whole interaction model stops working.",
+        },
+        {
+          heading: "The_Build",
+          text: "Ported the setup to Nix so the whole environment is reproducible from one config, not a pile of manual steps. Mapped Steam Input to niri's window management, so joystick and buttons drive workspace switching, resizing, and launching instead of a keyboard.",
+        },
+        {
+          heading: "Where_It_Stands",
+          text: "Running day to day as a real desktop, not a demo. The dotfiles behind it are getting cleaned up for a public release, repo link above will go live once that's done.",
+        },
+      ],
     },
     {
       name: "Decky_Mobile_Mode",
@@ -159,6 +173,20 @@ export const siteConfig = {
       link: "https://github.com/nord-winter/decky-mobile-mode",
       image: "",
       skills: ["Decky Loader", "KDE Plasma", "SteamOS", "Linux"],
+      caseStudy: [
+        {
+          heading: "The_Problem",
+          text: "Steam Deck's desktop mode runs full KDE Plasma, built for a mouse and keyboard. Switch to the built-in touchscreen and the same UI turns into tiny hit targets and menus that expect a cursor that isn't there.",
+        },
+        {
+          heading: "The_Build",
+          text: "A Decky Loader plugin that reflows the desktop-mode layout for touch: bigger targets, touch-friendly navigation, without replacing KDE or forking it. Built to install like any other Decky plugin, no manual config editing.",
+        },
+        {
+          heading: "Where_It_Stands",
+          text: "Working and in daily use on my own deck. Cleaning it up for a public release, repo link above will go live once that's done.",
+        },
+      ],
     },
     {
       name: "Tender_Automation_Platform",

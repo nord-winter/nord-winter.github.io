@@ -58,9 +58,22 @@ const { project } = Astro.props;
         </a>
       )}
 
-      <p class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] font-mono text-xs text-[color:var(--secondary)]">
-        Full write-up in progress. Ask directly for the details that matter to you.
-      </p>
+      {project.caseStudy && project.caseStudy.length > 0 ? (
+        <div class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] space-y-6 max-w-3xl">
+          {project.caseStudy.map((section: { heading: string; text: string }) => (
+            <div>
+              <h3 class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--primary)] mb-1.5">
+                {section.heading}
+              </h3>
+              <p class="text-sm text-[color:var(--on-surface-variant)] leading-relaxed">{section.text}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="mt-8 pt-6 border-t border-[color:var(--outline-variant)] font-mono text-xs text-[color:var(--secondary)]">
+          Full write-up in progress. Ask directly for the details that matter to you.
+        </p>
+      )}
     </div>
   </section>
 </Layout>
