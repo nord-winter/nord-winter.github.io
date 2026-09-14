@@ -6,6 +6,13 @@ export const siteConfig = {
   description:
     "Portfolio of Vladislav Simutin, Platform Engineer specializing in Go, GCP and Kubernetes",
   accentColor: "#00529b",
+  engagement: [
+    { label: "Engagement", value: "Freelance / contract, invoiced directly" },
+    { label: "Availability", value: "Open to new projects" },
+    { label: "Hours", value: "TODO_TIMEZONE" },
+    { label: "Authorization", value: "TODO_WORK_AUTHORIZATION" },
+    { label: "Language", value: "English, Russian" },
+  ],
   social: {
     email: "vladsimutin@gmail.com",
     linkedin: "https://www.linkedin.com/in/vladislav-simutin/",
@@ -98,7 +105,7 @@ export const siteConfig = {
       { label: "Shell", value: "fish" },
       { label: "Terminal", value: "kitty" },
       { label: "Theme", value: "Emerald_Black (custom)" },
-      { label: "WM", value: "TODO_WM_NAME" },
+      { label: "WM", value: "niri" },
     ],
     dotfilesUrl: "https://github.com/nord-winter/dotfiles",
     items: [
