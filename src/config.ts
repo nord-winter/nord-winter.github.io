@@ -9,7 +9,7 @@ export const siteConfig = {
   engagement: [
     { label: "Engagement", value: "Freelance / contract, invoiced directly" },
     { label: "Availability", value: "Open to new projects" },
-    { label: "Hours", value: "On_Request" },
+    { label: "Hours", value: "Bangkok (UTC+7)" },
     { label: "Authorization", value: "On_Request" },
     { label: "Language", value: "English, Russian" },
   ],
