@@ -12,8 +12,6 @@ export const siteConfig = {
       name: "Infrastructure_Cost_Audit",
       pitch:
         "Cut cloud spend 40% by automating VM lifecycle and rightsizing compute on GCP. Most GCP bills carry waste nobody's looked at closely, this finds it and fixes it.",
-      proofLabel: "Proven_Result",
-      proofValue: "40% Reduction",
       price: "On_Request",
       deliverables: [
         "Line-by-line audit of your current GCP bill",
@@ -28,8 +26,6 @@ export const siteConfig = {
       name: "High_Load_Architecture_Review",
       pitch:
         "Built and operated systems sustaining 80K+ RPS in production. I stress-test your architecture before your users do.",
-      proofLabel: "Proven_Result",
-      proofValue: "80K+ RPS",
       price: "On_Request",
       deliverables: [
         "Load test against your actual traffic shape, not a synthetic one",
@@ -44,8 +40,6 @@ export const siteConfig = {
       name: "Platform_Reliability_Setup",
       pitch:
         "Maintained 97% uptime across production services with k6 and Grafana observability. That's the bar your stack gets held to.",
-      proofLabel: "Proven_Result",
-      proofValue: "97% Uptime",
       price: "On_Request",
       deliverables: [
         "k6 load tests wired into your CI",
@@ -60,8 +54,6 @@ export const siteConfig = {
       name: "Personal_Infra_Setup",
       pitch:
         "Running a self-hosted stack at home (notes, monitoring, automation) behind a private network. If you or a small team want that kind of setup done properly, this is it.",
-      proofLabel: "Running_Since",
-      proofValue: "Daily use",
       price: "On_Request",
       deliverables: [
         "Self-hosted services picked for what you actually need, not everything",
