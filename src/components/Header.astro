@@ -192,12 +192,15 @@ const monogram = siteConfig.callsign
     hasPosts && (
       <a
         href="/#log"
-        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5"
+        class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
       >
         Blog
       </a>
     )
   }
+  <div class="pt-3 flex justify-start">
+    <ThemeToggle />
+  </div>
 </nav>
 
 <script>

@@ -3,20 +3,19 @@
 
 <div class="theme-toggle-wrap">
   <button
-    id="theme-toggle"
     type="button"
     class="theme-toggle"
     aria-label="Switch side"
     aria-pressed="false"
   >
-    <span id="theme-toggle-label" class="font-mono text-[0.6rem] uppercase tracking-[0.08em] text-[color:var(--on-surface-variant)]">
+    <span class="theme-toggle-label font-mono text-[0.6rem] uppercase tracking-[0.08em] text-[color:var(--on-surface-variant)]">
       Side: Blue
     </span>
     <span class="theme-toggle-track">
       <span class="theme-toggle-thumb"></span>
     </span>
   </button>
-  <span id="theme-hint" class="theme-hint font-mono text-[0.6rem] uppercase tracking-[0.05em]" hidden>
+  <span class="theme-hint font-mono text-[0.6rem] uppercase tracking-[0.05em]" hidden>
     Switch_Side
   </span>
 </div>
@@ -24,11 +23,11 @@
 <script>
   const STORAGE_KEY = "nw_theme";
   const HINT_KEY = "nw_theme_hint_seen";
-
-  const toggle = document.getElementById("theme-toggle");
-  const label = document.getElementById("theme-toggle-label");
-  const hint = document.getElementById("theme-hint");
   const root = document.documentElement;
+
+  // There can be more than one toggle on the page (desktop header +
+  // mobile nav panel), keep every instance in sync.
+  const wraps = Array.from(document.querySelectorAll<HTMLElement>(".theme-toggle-wrap"));
 
   function isRed() {
     return root.dataset.theme === "red";
@@ -36,9 +35,13 @@
 
   function render() {
     const red = isRed();
-    if (label) label.textContent = red ? "Side: Red" : "Side: Blue";
-    toggle?.setAttribute("aria-pressed", String(red));
-    toggle?.classList.toggle("theme-toggle-on", red);
+    wraps.forEach((wrap) => {
+      const toggle = wrap.querySelector<HTMLButtonElement>(".theme-toggle");
+      const label = wrap.querySelector<HTMLElement>(".theme-toggle-label");
+      if (label) label.textContent = red ? "Side: Red" : "Side: Blue";
+      toggle?.setAttribute("aria-pressed", String(red));
+      toggle?.classList.toggle("theme-toggle-on", red);
+    });
   }
 
   function setTheme(red: boolean) {
@@ -54,26 +57,37 @@
     document.dispatchEvent(new CustomEvent("nw:theme-change", { detail: { red } }));
   }
 
-  toggle?.addEventListener("click", () => {
-    setTheme(!isRed());
-    dismissHint();
-  });
-
-  render();
-
   function dismissHint() {
-    if (!hint) return;
-    hint.hidden = true;
+    wraps.forEach((wrap) => {
+      const hint = wrap.querySelector<HTMLElement>(".theme-hint");
+      const toggle = wrap.querySelector<HTMLElement>(".theme-toggle");
+      if (hint) hint.hidden = true;
+      toggle?.classList.remove("theme-toggle-hint");
+    });
     try {
       localStorage.setItem(HINT_KEY, "1");
     } catch {}
   }
 
+  wraps.forEach((wrap) => {
+    const toggle = wrap.querySelector<HTMLButtonElement>(".theme-toggle");
+    toggle?.addEventListener("click", () => {
+      setTheme(!isRed());
+      dismissHint();
+    });
+  });
+
+  render();
+
   try {
     const seen = localStorage.getItem(HINT_KEY);
-    if (!seen && hint) {
-      hint.hidden = false;
-      toggle?.classList.add("theme-toggle-hint");
+    if (!seen) {
+      wraps.forEach((wrap) => {
+        const hint = wrap.querySelector<HTMLElement>(".theme-hint");
+        const toggle = wrap.querySelector<HTMLElement>(".theme-toggle");
+        if (hint) hint.hidden = false;
+        toggle?.classList.add("theme-toggle-hint");
+      });
       setTimeout(dismissHint, 6000);
     }
   } catch {}
