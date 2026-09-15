@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nord-winter.github.io/sitemap-index.xml
