@@ -6,8 +6,9 @@ import { siteConfig } from "../config";
   id="hero"
   class="module-seam bg-[color:var(--surface-container-lowest)] relative overflow-hidden p-6 lg:p-8"
 >
-  <div id="hero-split-bar" class="absolute top-0 left-0 w-full h-2 flex overflow-hidden">
-    <span class="hero-split-a hero-split-diag flex-1 h-full"></span>
+  <div id="hero-split-bg" class="hero-split-bg absolute inset-0 z-0"></div>
+  <div class="absolute top-0 left-0 w-full h-1.5 flex">
+    <span class="hero-split-a flex-1 h-full"></span>
     <span class="hero-split-b flex-1 h-full"></span>
   </div>
 
@@ -85,11 +86,11 @@ import { siteConfig } from "../config";
     type();
   }
 
-  const splitBar = document.getElementById("hero-split-bar");
+  const splitBg = document.getElementById("hero-split-bg");
   document.addEventListener("nw:theme-change", () => {
-    if (!splitBar) return;
-    splitBar.classList.add("hero-split-glitch");
-    setTimeout(() => splitBar.classList.remove("hero-split-glitch"), 420);
+    if (!splitBg) return;
+    splitBg.classList.add("hero-split-glitch");
+    setTimeout(() => splitBg.classList.remove("hero-split-glitch"), 420);
   });
 </script>
 
@@ -112,9 +113,15 @@ import { siteConfig } from "../config";
     transition: background-color 0.4s ease;
   }
 
-  .hero-split-diag {
-    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-    margin-right: -10px;
+  .hero-split-bg {
+    background: linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--hero-split-a) 10%, transparent) 0%,
+      color-mix(in srgb, var(--hero-split-a) 10%, transparent) 48%,
+      color-mix(in srgb, var(--hero-split-b) 10%, transparent) 52%,
+      color-mix(in srgb, var(--hero-split-b) 10%, transparent) 100%
+    );
+    transition: background 0.4s ease;
   }
 
   /* Fixed, never swap with the theme toggle: the word "Blue" is always
