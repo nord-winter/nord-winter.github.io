@@ -113,33 +113,6 @@ const topProjects = siteConfig.projects.filter((p) => p.link).slice(0, 2);
         margin: 0 0 20px;
       }
 
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-bottom: 22px;
-      }
-
-      .stat {
-        border: 1px solid #c2c6d3;
-        border-top: 2px solid #00529b;
-        padding: 8px 10px;
-      }
-
-      .stat-label {
-        font-size: 9px;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: #00529b;
-        font-weight: 700;
-      }
-
-      .stat-value {
-        font-size: 15px;
-        font-weight: 700;
-        margin-top: 2px;
-      }
-
       section {
         margin-bottom: 20px;
       }
@@ -258,21 +231,6 @@ const topProjects = siteConfig.projects.filter((p) => p.link).slice(0, 2);
 
     <h1>Consultation Services</h1>
     <p class="lead">{siteConfig.aboutMe}</p>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-label">Cost_Cut</div>
-        <div class="stat-value">40%</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Peak_RPS</div>
-        <div class="stat-value">80K+</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Uptime</div>
-        <div class="stat-value">97%</div>
-      </div>
-    </div>
 
     <section>
       <div class="section-label">What I Take On</div>
