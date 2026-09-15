@@ -1,0 +1,322 @@
+---
+import { siteConfig } from "../config";
+
+const monogram = siteConfig.callsign
+  .split("_")
+  .map((word) => word[0])
+  .join("")
+  .toUpperCase();
+
+const topServices = siteConfig.services.slice(0, 3);
+const topProjects = siteConfig.projects.filter((p) => p.link).slice(0, 2);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{siteConfig.callsign} - Consultation Brochure</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 16mm 18mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "IBM Plex Mono", "JetBrains Mono", monospace;
+        color: #191c20;
+        background: #fdfdfd;
+        margin: 0;
+        padding: 24px;
+        max-width: 780px;
+        margin-inline: auto;
+      }
+
+      .print-btn {
+        display: block;
+        margin: 0 auto 24px;
+        padding: 10px 18px;
+        font-family: inherit;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: #00529b;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #00529b;
+        padding-bottom: 12px;
+        margin-bottom: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .monogram {
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid #00529b;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #00529b;
+        font-size: 14px;
+      }
+
+      .brand-name {
+        font-weight: 700;
+        font-size: 16px;
+        color: #00529b;
+        letter-spacing: 0.05em;
+      }
+
+      .brand-title {
+        font-size: 11px;
+        color: #585f68;
+      }
+
+      .tagline {
+        font-size: 11px;
+        text-align: right;
+        color: #424751;
+        max-width: 260px;
+        line-height: 1.4;
+      }
+
+      h1 {
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        margin: 0 0 6px;
+      }
+
+      .lead {
+        font-size: 12.5px;
+        line-height: 1.6;
+        color: #424751;
+        margin: 0 0 20px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+
+      .stat {
+        border: 1px solid #c2c6d3;
+        border-top: 2px solid #00529b;
+        padding: 8px 10px;
+      }
+
+      .stat-label {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #00529b;
+        font-weight: 700;
+      }
+
+      .stat-value {
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 2px;
+      }
+
+      section {
+        margin-bottom: 20px;
+      }
+
+      .section-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #00529b;
+        font-weight: 700;
+        border-bottom: 1px solid #c2c6d3;
+        padding-bottom: 4px;
+        margin-bottom: 10px;
+      }
+
+      .service-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px dashed #c2c6d3;
+      }
+
+      .service-row:last-child {
+        border-bottom: none;
+      }
+
+      .service-name {
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .service-pitch {
+        font-size: 11px;
+        color: #424751;
+        margin-top: 2px;
+        line-height: 1.5;
+      }
+
+      .service-proof {
+        flex-shrink: 0;
+        font-size: 10px;
+        font-weight: 700;
+        color: #00529b;
+        white-space: nowrap;
+      }
+
+      .project-row {
+        font-size: 11px;
+        padding: 6px 0;
+        color: #424751;
+      }
+
+      .project-row b {
+        color: #191c20;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        font-size: 10.5px;
+      }
+
+      .grid-2 .item-label {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #585f68;
+        font-size: 9px;
+      }
+
+      footer {
+        margin-top: 24px;
+        padding-top: 12px;
+        border-top: 2px solid #00529b;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10.5px;
+        color: #424751;
+      }
+
+      .cta {
+        background: #00529b;
+        color: white;
+        padding: 6px 14px;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        text-decoration: none;
+      }
+
+      @media print {
+        .print-btn {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+
+    <header>
+      <div class="brand">
+        <div class="monogram">{monogram}</div>
+        <div>
+          <div class="brand-name">{siteConfig.callsign}</div>
+          <div class="brand-title">{siteConfig.title}</div>
+        </div>
+      </div>
+      <div class="tagline">Blue builds it, red tries to break it.<br />Same person, same standards, either color.</div>
+    </header>
+
+    <h1>Consultation Services</h1>
+    <p class="lead">{siteConfig.aboutMe}</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Cost_Cut</div>
+        <div class="stat-value">40%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Peak_RPS</div>
+        <div class="stat-value">80K+</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Uptime</div>
+        <div class="stat-value">97%</div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-label">What I Take On</div>
+      {
+        topServices.map((s) => (
+          <div class="service-row">
+            <div>
+              <div class="service-name">{s.name.replace(/_/g, " ")}</div>
+              <div class="service-pitch">{s.pitch}</div>
+            </div>
+            <div class="service-proof">{s.proofValue}</div>
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <div class="section-label">Recent Work</div>
+      {
+        topProjects.map((p) => (
+          <div class="project-row">
+            <b>{p.name.replace(/_/g, " ")}</b>: {p.description}
+          </div>
+        ))
+      }
+    </section>
+
+    <section>
+      <div class="section-label">Working Together</div>
+      <div class="grid-2">
+        {
+          siteConfig.engagement.map((item) => (
+            <div>
+              <div class="item-label">{item.label}</div>
+              <div>{item.value}</div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <footer>
+      <span>nord-winter.github.io &middot; {siteConfig.social.email}</span>
+      <a class="cta" href={`mailto:${siteConfig.social.email}?subject=Intro%20Call`}>Open_Channel</a>
+    </footer>
+  </body>
+</html>
