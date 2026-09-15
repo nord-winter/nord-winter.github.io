@@ -34,6 +34,10 @@ export const siteConfig = {
       label: "AI_INTEGRATION",
       text: "RAG pipelines and AI agents in production, vLLM, Qdrant, MCP servers and GenKit, from vector search to end-to-end automation.",
     },
+    {
+      label: "OFFENSIVE_SECURITY",
+      text: "Daily HackTheBox practice, CTF PHDays 2019 Top 3 finish, TryHackMe and Cisco security certifications behind it, the same attacker mindset that goes into hardening what I build.",
+    },
   ],
   manifesto: {
     quote:
@@ -136,7 +140,7 @@ export const siteConfig = {
         },
         {
           heading: "Where_It_Stands",
-          text: "Running day to day as a real desktop, not a demo. Repo is public, above.",
+          text: "This is what I actually use, not a demo that got abandoned after launch. Code's public, linked above.",
         },
       ],
     },
@@ -159,7 +163,7 @@ export const siteConfig = {
         },
         {
           heading: "Where_It_Stands",
-          text: "Working and in daily use on my own deck. Repo is public, above.",
+          text: "Installed on my own deck right now, no separate test unit. Source is up top, linked.",
         },
       ],
     },
@@ -182,7 +186,7 @@ export const siteConfig = {
         },
         {
           heading: "Where_It_Stands",
-          text: "Running daily, kept on a private network by design. Repo is public, above, infrastructure specifics (IPs, ports, access) stay off it on purpose.",
+          text: "In active use, kept off the public internet on purpose. The code is up there, infrastructure details like IPs, ports and access stay out of it deliberately.",
         },
       ],
     },

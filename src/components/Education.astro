@@ -1,44 +1,73 @@
 ---
 import { siteConfig } from "../config";
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
+const hasCerts = siteConfig.certifications && siteConfig.certifications.length > 0;
 ---
 
 {
-  hasEducation && (
+  (hasEducation || hasCerts) && (
     <section
       id="education"
       class="py-8"
     >
-      <div class="panel-header">
-        <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">school</span>
-        <h2 class="panel-label">Training_Records</h2>
-        <span class="panel-tag ml-auto">{siteConfig.education.length} Entries</span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {siteConfig.education.map((edu) => (
-          <div class="module-seam bg-[color:var(--surface-container-lowest)] p-5">
-            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-1">
-              <div>
-                <h3 class="text-base font-semibold text-[color:var(--on-surface)]">{edu.degree}</h3>
-                <p class="font-mono text-sm text-[color:var(--primary)]">{edu.school}</p>
-              </div>
-              <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">
-                {edu.dateRange}
-              </span>
-            </div>
-
-            <ul class="space-y-2">
-              {edu.achievements.map((achievement) => (
-                <li class="flex items-start">
-                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--primary)] mt-2 mr-3 flex-shrink-0" />
-                  <span class="text-sm text-[color:var(--on-surface-variant)]">{achievement}</span>
-                </li>
-              ))}
-            </ul>
+      {hasEducation && (
+        <>
+          <div class="panel-header">
+            <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">school</span>
+            <h2 class="panel-label">Training_Records</h2>
+            <span class="panel-tag ml-auto">{siteConfig.education.length} Entries</span>
           </div>
-        ))}
-      </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {siteConfig.education.map((edu) => (
+              <div class="module-seam bg-[color:var(--surface-container-lowest)] p-5">
+                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-1">
+                  <div>
+                    <h3 class="text-base font-semibold text-[color:var(--on-surface)]">{edu.degree}</h3>
+                    <p class="font-mono text-sm text-[color:var(--primary)]">{edu.school}</p>
+                  </div>
+                  <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">
+                    {edu.dateRange}
+                  </span>
+                </div>
+
+                <ul class="space-y-2">
+                  {edu.achievements.map((achievement) => (
+                    <li class="flex items-start">
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--primary)] mt-2 mr-3 flex-shrink-0" />
+                      <span class="text-sm text-[color:var(--on-surface-variant)]">{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {hasCerts && (
+        <div class={hasEducation ? "mt-10" : ""}>
+          <div class="panel-header">
+            <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">verified</span>
+            <h2 class="panel-label">Certifications</h2>
+            <span class="panel-tag ml-auto">{siteConfig.certifications.length} Entries</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {siteConfig.certifications.map((cert) => (
+              <div class="module-seam bg-[color:var(--surface-container-lowest)] px-4 py-3 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-[color:var(--on-surface)] truncate">{cert.name}</p>
+                  <p class="font-mono text-xs text-[color:var(--on-surface-variant)]">{cert.issuer}</p>
+                </div>
+                <span class="flex-shrink-0 font-mono text-xs text-[color:var(--primary)] bg-[color:var(--surface-container)] px-2 py-1">
+                  {cert.year}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
