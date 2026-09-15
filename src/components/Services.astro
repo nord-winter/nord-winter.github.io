@@ -2,92 +2,26 @@
 import { siteConfig } from "../config";
 
 const mailBase = `mailto:${siteConfig.social.email}`;
-
-const services = [
-  {
-    unit: "UNIT-S1 // COST",
-    name: "Infrastructure_Cost_Audit",
-    pitch:
-      "Cut cloud spend 40% by automating VM lifecycle and rightsizing compute on GCP. Most GCP bills carry waste nobody's looked at closely, this finds it and fixes it.",
-    proofLabel: "Proven_Result",
-    proofValue: "40% Reduction",
-    price: "On_Request",
-    deliverables: [
-      "Line-by-line audit of your current GCP bill",
-      "Automated VM lifecycle rules (auto-suspend on idle)",
-      "Written report ranking fixes by savings vs. effort",
-    ],
-    cta: "Request_Audit",
-    href: `${mailBase}?subject=${encodeURIComponent("Infrastructure Cost Audit")}`,
-  },
-  {
-    unit: "UNIT-S2 // SCALE",
-    name: "High_Load_Architecture_Review",
-    pitch:
-      "Built and operated systems sustaining 80K+ RPS in production. I stress-test your architecture before your users do.",
-    proofLabel: "Proven_Result",
-    proofValue: "80K+ RPS",
-    price: "On_Request",
-    deliverables: [
-      "Load test against your actual traffic shape, not a synthetic one",
-      "A ranked list of what breaks first and why",
-      "Concrete fixes, not a slide deck of best practices",
-    ],
-    cta: "Book_Review",
-    href: `${mailBase}?subject=${encodeURIComponent("Architecture Review")}`,
-  },
-  {
-    unit: "UNIT-S3 // SRE",
-    name: "Platform_Reliability_Setup",
-    pitch:
-      "Maintained 97% uptime across production services with k6 and Grafana observability. That's the bar your stack gets held to.",
-    proofLabel: "Proven_Result",
-    proofValue: "97% Uptime",
-    price: "On_Request",
-    deliverables: [
-      "k6 load tests wired into your CI",
-      "Grafana dashboards for the metrics that actually predict an outage",
-      "Alerting that pages on signal, not noise",
-    ],
-    cta: "Start_Consultation",
-    href: `${mailBase}?subject=${encodeURIComponent("Platform Reliability Consultation")}`,
-  },
-  {
-    unit: "UNIT-S4 // INFRA",
-    name: "Personal_Infra_Setup",
-    pitch:
-      "Running a self-hosted stack at home (notes, monitoring, automation) behind a private network. If you or a small team want that kind of setup done properly, this is it.",
-    proofLabel: "Running_Since",
-    proofValue: "Daily use",
-    price: "On_Request",
-    deliverables: [
-      "Self-hosted services picked for what you actually need, not everything",
-      "Monitoring so you know it's broken before you notice by accident",
-      "A setup you can maintain yourself after I leave",
-    ],
-    cta: "Ask_About_This",
-    href: `${mailBase}?subject=${encodeURIComponent("Personal Infra Setup")}`,
-  },
-];
-
 const contactEmail = siteConfig.social.email;
 ---
 
 <section id="services" class="py-8" style={`--accent-color: ${siteConfig.accentColor}`}>
   <div class="panel-header">
     <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">handshake</span>
-    <h2 class="panel-label">Consultation_Services</h2>
-    <span class="panel-tag ml-auto">{services.length} Offers</span>
+    <h2 class="panel-label">Consulting</h2>
+    <a
+      href="/services"
+      class="panel-tag ml-auto hover:text-[color:var(--primary)] transition-colors inline-flex items-center gap-1"
+    >
+      View_Services
+      <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+    </a>
   </div>
 
-  <p class="text-sm text-[color:var(--on-surface-variant)] max-w-2xl mb-5">
-    You work directly with the person doing the work, not a project manager relaying it to someone else. No bench, no handoffs, no team you've never met billing hours on your account.
-  </p>
-
-  <div class="module-seam bg-[color:var(--surface-container)] border-l-4 border-l-[color:var(--primary)] p-4 mb-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+  <div class="module-seam bg-[color:var(--surface-container)] border-l-4 border-l-[color:var(--primary)] p-4 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
     <div>
       <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
-        Free_Intro_Call
+        Open_Channel
       </div>
       <p class="text-sm text-[color:var(--on-surface-variant)]">
         20 minutes, no pitch. We figure out if this is worth your time before either of us commits to anything.
@@ -97,94 +31,8 @@ const contactEmail = siteConfig.social.email;
       href={`${mailBase}?subject=${encodeURIComponent("Intro Call")}`}
       class="flex-shrink-0 py-2 px-4 text-center font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
     >
-      Book_Free_Call
+      Open_Channel
     </a>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {
-      services.map((service) => (
-        <div class="service-card module-seam bg-[color:var(--surface-container-lowest)] p-5 flex flex-col transition-transform duration-150">
-          <div class="flex items-start justify-between gap-3">
-            <span class="font-mono text-xs text-[color:var(--on-surface-variant)]">{service.unit}</span>
-            <span class="font-mono text-xs font-bold text-[color:var(--primary)] flex-shrink-0">{service.price}</span>
-          </div>
-          <h3 class="mt-1 text-lg font-semibold text-[color:var(--on-surface)]">
-            {service.name.replace(/_/g, " ")}
-          </h3>
-          <p class="mt-3 text-sm text-[color:var(--on-surface-variant)] leading-relaxed">
-            {service.pitch}
-          </p>
-          <div class="mt-4 bg-[color:var(--surface-container)] border border-[color:var(--outline-variant)] p-2.5">
-            <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-              {service.proofLabel}
-            </div>
-            <div class="mt-0.5 font-mono text-sm font-bold text-[color:var(--primary)]">
-              {service.proofValue}
-            </div>
-          </div>
-          <div class="mt-4 flex-1">
-            <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)] mb-2">
-              You_Get
-            </div>
-            <ul class="space-y-1.5">
-              {service.deliverables.map((item) => (
-                <li class="flex items-start gap-2 text-sm text-[color:var(--on-surface-variant)]">
-                  <span class="text-[color:var(--primary)] font-mono flex-shrink-0">›</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <a
-            href={service.href}
-            class="mt-4 w-full py-2.5 text-center font-mono text-xs uppercase tracking-[0.08em] border border-[color:var(--primary)] text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white transition-colors"
-          >
-            {service.cta}
-          </a>
-        </div>
-      ))
-    }
-  </div>
-
-  <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
-    <div class="flex items-center justify-between mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
-      <span class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-        Client_Feedback
-      </span>
-      <span class="panel-tag">Awaiting_Real_Quotes</span>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {
-        [1, 2].map((n) => (
-          <div class="border border-dashed border-[color:var(--outline-variant)] p-4">
-            <p class="text-sm text-[color:var(--on-surface-variant)] italic">
-              [Placeholder slot {n}: a real client quote goes here once one exists. Not filled in yet, not a real
-              testimonial.]
-            </p>
-            <p class="mt-2 font-mono text-xs text-[color:var(--secondary)]">[Client name, role/company]</p>
-          </div>
-        ))
-      }
-    </div>
-  </div>
-
-  <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
-    <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)] mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
-      Working_With_Me
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
-      {
-        siteConfig.engagement.map((item) => (
-          <div class="min-w-0">
-            <div class="font-mono text-[0.6rem] uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-              {item.label}
-            </div>
-            <div class="mt-0.5 text-sm text-[color:var(--on-surface)] break-words">{item.value}</div>
-          </div>
-        ))
-      }
-    </div>
   </div>
 
   <p class="mt-6 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--primary)] flex items-center gap-1.5">
@@ -360,11 +208,6 @@ const contactEmail = siteConfig.social.email;
 </script>
 
 <style>
-  .service-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-  }
-
   .whoami-highlight {
     box-shadow:
       3px 3px 0px 0px var(--primary),

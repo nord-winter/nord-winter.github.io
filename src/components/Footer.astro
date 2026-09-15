@@ -126,6 +126,7 @@ const year = new Date().getFullYear();
 
       <nav class="flex gap-x-8">
         <a href={`/profile/${siteConfig.slug}`} class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Meet_Me</a>
+        <a href="/services" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Services</a>
         {hasProjects && <a href="/#projects" class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Showcase</a>}
         {hasExperience && <a href={`/profile/${siteConfig.slug}#experience`} class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Experience</a>}
         {hasEducation && <a href={`/profile/${siteConfig.slug}#education`} class="font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--secondary)] hover:text-[color:var(--primary)] transition-colors">Education</a>}
