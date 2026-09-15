@@ -108,21 +108,17 @@ const mailBase = `mailto:${siteConfig.social.email}`;
     </div>
 
     <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
-      <div class="flex items-center justify-between mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
+      <div class="mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
         <span class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)]">
-          Client_Feedback
+          What_People_Say
         </span>
-        <span class="panel-tag">Awaiting_Real_Quotes</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {
-          [1, 2].map((n) => (
-            <div class="border border-dashed border-[color:var(--outline-variant)] p-4">
-              <p class="text-sm text-[color:var(--on-surface-variant)] italic">
-                [Placeholder slot {n}: a real client quote goes here once one exists. Not filled in yet, not a real
-                testimonial.]
-              </p>
-              <p class="mt-2 font-mono text-xs text-[color:var(--secondary)]">[Client name, role/company]</p>
+          siteConfig.testimonials.map((t) => (
+            <div class="border border-[color:var(--outline-variant)] p-4">
+              <p class="text-sm text-[color:var(--on-surface-variant)] italic">"{t.quote}"</p>
+              <p class="mt-2 font-mono text-xs text-[color:var(--secondary)]">- {t.name}</p>
             </div>
           ))
         }

@@ -64,6 +64,18 @@ export const siteConfig = {
       mailSubject: "Personal Infra Setup",
     },
   ],
+  testimonials: [
+    {
+      quote:
+        "I had the pleasure of working with Vladislav. He is one of those rare professionals who combines strong technical expertise with real ownership and responsibility. No matter how challenging the task was, I could always rely on him to find a solution and get things done. His ability to think strategically, solve complex problems, and keep projects moving forward made a significant impact on our company. Beyond his technical skills, Vladislav is a trustworthy leader, a great team player, and someone who genuinely cares about the success of the business. I highly recommend him to any organization looking for a strong CTO and technology leader.",
+      name: "Artur",
+    },
+    {
+      quote:
+        "He's full of initiative and energy, has a deep understanding of technology, and is a skilled engineer and a great colleague.",
+      name: "Evgenii",
+    },
+  ],
   engagement: [
     { label: "Engagement", value: "Freelance / contract, invoiced directly" },
     { label: "Availability", value: "Open to new projects" },
