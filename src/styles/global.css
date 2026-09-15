@@ -23,6 +23,8 @@
   --inverse-surface: #2e3036;
   --error: #ba1a1a;
   --glow: #4fa8ff;
+  --hero-split-a: #00529b;
+  --hero-split-b: #e0393f;
 }
 
 /* Red/dark side - same structure, different palette. Toggled via [data-theme] on <html>. */
@@ -44,6 +46,8 @@
   --inverse-surface: #f3e6e6;
   --error: #f59e0b;
   --glow: #ff5c5c;
+  --hero-split-a: #e0393f;
+  --hero-split-b: #00529b;
 }
 
 html {
