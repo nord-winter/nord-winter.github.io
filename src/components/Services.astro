@@ -17,20 +17,32 @@ const mailBase = `mailto:${siteConfig.social.email}`;
     </a>
   </div>
 
-  <div class="module-seam bg-[color:var(--surface-container)] border-l-4 border-l-[color:var(--primary)] p-4 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
-    <div>
-      <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
-        Open_Channel
-      </div>
-      <p class="text-sm text-[color:var(--on-surface-variant)]">
-        20 minutes, no pitch. We figure out if this is worth your time before either of us commits to anything.
-      </p>
+  <div class="module-seam bg-[color:var(--surface-container-lowest)] p-4">
+    <div class="flex flex-wrap gap-2">
+      {
+        siteConfig.services.map((service) => (
+          <a href="/services" class="chip">
+            {service.name.replace(/_/g, " ")}
+          </a>
+        ))
+      }
     </div>
-    <a
-      href={`${mailBase}?subject=${encodeURIComponent("Intro Call")}`}
-      class="flex-shrink-0 py-2 px-4 text-center font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
-    >
-      Open_Channel
-    </a>
+
+    <div class="mt-4 pt-4 border-t border-[color:var(--outline-variant)] flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+      <div>
+        <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+          Open_Channel
+        </div>
+        <p class="text-sm text-[color:var(--on-surface-variant)]">
+          20 minutes, no pitch. We figure out if this is worth your time before either of us commits to anything.
+        </p>
+      </div>
+      <a
+        href={`${mailBase}?subject=${encodeURIComponent("Intro Call")}`}
+        class="flex-shrink-0 py-2 px-4 text-center font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
+      >
+        Open_Channel
+      </a>
+    </div>
   </div>
 </section>

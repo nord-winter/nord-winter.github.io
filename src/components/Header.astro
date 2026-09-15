@@ -19,7 +19,7 @@ const monogram = siteConfig.callsign
   id="header"
   class="fixed top-0 left-0 right-0 z-50 hidden md:flex justify-between items-center px-6 lg:px-12 h-16 header-surface backdrop-blur-md border-b border-[color:var(--outline-variant)]"
 >
-  <div class="flex items-center gap-3 text-[color:var(--primary)]">
+  <a href="/" class="flex items-center gap-3 text-[color:var(--primary)]">
     <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
       <circle
         cx="14"
@@ -42,7 +42,7 @@ const monogram = siteConfig.callsign
     <span class="font-mono text-lg font-bold tracking-tighter text-[color:var(--primary)]">
       {siteConfig.callsign} // SYS
     </span>
-  </div>
+  </a>
 
   <nav class="flex items-center gap-8">
     <a
@@ -90,7 +90,7 @@ const monogram = siteConfig.callsign
     {
       hasPosts && (
         <a
-          href="/#log"
+          href="/blog"
           class="nav-tab font-mono text-xs tracking-[0.15em] uppercase text-[color:var(--on-surface-variant)] hover:text-[color:var(--primary)] transition-colors"
         >
           Blog
@@ -191,7 +191,7 @@ const monogram = siteConfig.callsign
   {
     hasPosts && (
       <a
-        href="/#log"
+        href="/blog"
         class="font-mono text-sm uppercase tracking-[0.1em] text-[color:var(--on-surface-variant)] py-2.5 border-b border-[color:var(--outline-variant)]"
       >
         Blog

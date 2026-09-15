@@ -10,121 +10,53 @@ const posts = postsRaw
     tag: p.data.tag,
     status: p.data.status,
   }))
-  .sort((a, b) => b.date.localeCompare(a.date));
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 3);
 
 const hasPosts = posts.length > 0;
+
+const statusColor: Record<string, string> = {
+  PUBLISHED: "text-[color:var(--primary)]",
+  DRAFT: "text-[color:var(--secondary)]",
+  PLANNED: "text-[color:var(--secondary)]",
+};
 ---
 
 {
   hasPosts && (
-    <section
-      id="log"
-      class="py-8"
-    >
+    <section id="log" class="py-8">
       <div class="panel-header">
         <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">rss_feed</span>
         <h2 class="panel-label">Dispatch_Log</h2>
-        <span class="panel-tag ml-auto">{posts.length} Entries</span>
+        <a
+          href="/blog"
+          class="panel-tag ml-auto hover:text-[color:var(--primary)] transition-colors inline-flex items-center gap-1"
+        >
+          View_All_Posts
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </a>
       </div>
 
-      <div class="module-seam bg-[color:var(--surface-container-lowest)] p-4 flex items-center gap-3 mb-4">
-        <span class="font-mono text-sm text-[color:var(--primary)] whitespace-nowrap">
-          NW:\LOG&gt;
-        </span>
-        <input
-          id="log-filter"
-          type="text"
-          placeholder="FILTER_BY_TITLE_OR_TAG..."
-          class="flex-1 bg-transparent border-none outline-none font-mono text-sm text-[color:var(--on-surface)] placeholder:text-[color:var(--outline)]"
-        />
-        <span class="material-symbols-outlined text-[color:var(--outline)] text-[18px]">search</span>
-      </div>
-
-      <div class="module-seam bg-[color:var(--surface-container-lowest)] overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b border-[color:var(--outline-variant)] bg-[color:var(--surface-container-low)]">
-              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
-                Date
-              </th>
-              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
-                Title
-              </th>
-              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)]">
-                Tag
-              </th>
-              <th class="px-5 py-3 font-mono text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--primary)] text-right">
-                Status
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-[color:var(--outline-variant)]">
-            {posts.map((post) => (
-              <tr
-                class="log-row transition-colors"
-                data-title={post.title.toLowerCase()}
-                data-tag={post.tag.toLowerCase()}
-              >
-                <td class="p-0">
-                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-[color:var(--on-surface-variant)] whitespace-nowrap">
-                    {post.date}
-                  </a>
-                </td>
-                <td class="p-0">
-                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 text-sm text-[color:var(--on-surface)]">
-                    {post.title}
-                  </a>
-                </td>
-                <td class="p-0">
-                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-[color:var(--secondary)]">
-                    {post.tag}
-                  </a>
-                </td>
-                <td class="p-0">
-                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-right text-[color:var(--primary)] font-bold justify-end">
-                    {post.status}
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p id="log-empty" class="hidden px-5 py-6 font-mono text-xs text-[color:var(--secondary)]">
-          No entries match that filter.
-        </p>
+      <div class="module-seam bg-[color:var(--surface-container-lowest)] divide-y divide-[color:var(--outline-variant)]">
+        {posts.map((post) => (
+          <a href={`/log/${post.slug}`} class="dispatch-row flex items-center gap-4 px-5 py-3 transition-colors">
+            <span class="font-mono text-xs text-[color:var(--on-surface-variant)] whitespace-nowrap">
+              {post.date}
+            </span>
+            <span class="text-sm text-[color:var(--on-surface)] flex-1 min-w-0 truncate">{post.title}</span>
+            <span class="font-mono text-xs text-[color:var(--secondary)] hidden sm:inline">{post.tag}</span>
+            <span class={`font-mono text-xs font-bold flex-shrink-0 ${statusColor[post.status]}`}>
+              {post.status}
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   )
 }
 
-<script>
-  const input = document.getElementById("log-filter") as HTMLInputElement | null;
-  const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>(".log-row"));
-  const empty = document.getElementById("log-empty");
-
-  input?.addEventListener("input", () => {
-    const query = input.value.trim().toLowerCase();
-    let visible = 0;
-    rows.forEach((row) => {
-      const match =
-        !query ||
-        row.dataset.title?.includes(query) ||
-        row.dataset.tag?.includes(query);
-      row.style.display = match ? "" : "none";
-      if (match) visible++;
-    });
-    empty?.classList.toggle("hidden", visible !== 0);
-  });
-</script>
-
 <style>
-  .log-row:hover {
+  .dispatch-row:hover {
     background: color-mix(in srgb, var(--primary) 5%, transparent);
-    border-left: 3px solid var(--primary);
-  }
-
-  .log-cell {
-    display: flex;
-    align-items: center;
   }
 </style>
