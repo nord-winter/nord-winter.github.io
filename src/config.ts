@@ -161,7 +161,7 @@ export const siteConfig = {
         },
         {
           heading: "Where_It_Stands",
-          text: "Running day to day as a real desktop, not a demo. The dotfiles behind it are getting cleaned up for a public release, repo link above will go live once that's done.",
+          text: "Running day to day as a real desktop, not a demo. Repo is public, above.",
         },
       ],
     },
@@ -184,7 +184,30 @@ export const siteConfig = {
         },
         {
           heading: "Where_It_Stands",
-          text: "Working and in daily use on my own deck. Cleaning it up for a public release, repo link above will go live once that's done.",
+          text: "Working and in daily use on my own deck. Repo is public, above.",
+        },
+      ],
+    },
+    {
+      name: "Locpi",
+      slug: "locpi",
+      description:
+        "A Raspberry Pi running my own notes and monitoring stack behind a private network. The same setup I'd build for you under Personal_Infra_Setup, running on my own hardware first.",
+      link: "https://github.com/nord-winter/locpi",
+      image: "",
+      skills: ["Raspberry Pi", "Memos", "Prometheus", "Grafana"],
+      caseStudy: [
+        {
+          heading: "The_Problem",
+          text: "Notes apps that live in someone else's cloud stop being yours the moment their pricing or policy changes. Wanted something I fully own, on hardware I control.",
+        },
+        {
+          heading: "The_Build",
+          text: "Memos for the notes themselves, Prometheus and Grafana watching the box so a failure gets noticed before it becomes a lost week of notes, and a small Telegram bot that pulls content in without needing to open a browser.",
+        },
+        {
+          heading: "Where_It_Stands",
+          text: "Running daily, kept on a private network by design. Repo is public, above, infrastructure specifics (IPs, ports, access) stay off it on purpose.",
         },
       ],
     },

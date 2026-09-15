@@ -80,6 +80,27 @@ const contactEmail = siteConfig.social.email;
     <span class="panel-tag ml-auto">{services.length} Offers</span>
   </div>
 
+  <p class="text-sm text-[color:var(--on-surface-variant)] max-w-2xl mb-5">
+    You work directly with the person doing the work, not a project manager relaying it to someone else. No bench, no handoffs, no team you've never met billing hours on your account.
+  </p>
+
+  <div class="module-seam bg-[color:var(--surface-container)] border-l-4 border-l-[color:var(--primary)] p-4 mb-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+    <div>
+      <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+        Free_Intro_Call
+      </div>
+      <p class="text-sm text-[color:var(--on-surface-variant)]">
+        20 minutes, no pitch. We figure out if this is worth your time before either of us commits to anything.
+      </p>
+    </div>
+    <a
+      href={`${mailBase}?subject=${encodeURIComponent("Intro Call")}`}
+      class="flex-shrink-0 py-2 px-4 text-center font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
+    >
+      Book_Free_Call
+    </a>
+  </div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {
       services.map((service) => (
@@ -124,6 +145,28 @@ const contactEmail = siteConfig.social.email;
         </div>
       ))
     }
+  </div>
+
+  <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
+    <div class="flex items-center justify-between mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
+      <span class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)]">
+        Client_Feedback
+      </span>
+      <span class="panel-tag">Awaiting_Real_Quotes</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        [1, 2].map((n) => (
+          <div class="border border-dashed border-[color:var(--outline-variant)] p-4">
+            <p class="text-sm text-[color:var(--on-surface-variant)] italic">
+              [Placeholder slot {n}: a real client quote goes here once one exists. Not filled in yet, not a real
+              testimonial.]
+            </p>
+            <p class="mt-2 font-mono text-xs text-[color:var(--secondary)]">[Client name, role/company]</p>
+          </div>
+        ))
+      }
+    </div>
   </div>
 
   <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
