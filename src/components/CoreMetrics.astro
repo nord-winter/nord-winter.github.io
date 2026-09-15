@@ -9,17 +9,15 @@ type Metric = { label: string; value: string };
 let liveMetrics: Metric[] | null = null;
 
 try {
-  const repoRes = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
+  const userRes = await fetch(`https://api.github.com/users/${REPO_OWNER}`);
+  const commitsRes = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=1`,
+  );
 
-  if (repoRes.ok) {
-    const repo = await repoRes.json();
-    const ageDays = Math.floor(
-      (Date.now() - new Date(repo.created_at).getTime()) / 86400000,
-    );
+  if (userRes.ok) {
+    const user = await userRes.json();
+    const onGithubSince = new Date(user.created_at).getFullYear();
 
-    const commitsRes = await fetch(
-      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?per_page=1`,
-    );
     let commitCount = 1;
     if (commitsRes.ok) {
       const link = commitsRes.headers.get("link");
@@ -28,8 +26,8 @@ try {
     }
 
     liveMetrics = [
-      { label: "Repo_Age", value: `${ageDays} Days` },
-      { label: "Commits", value: `${commitCount}` },
+      { label: "On_GitHub_Since", value: `${onGithubSince}` },
+      { label: "Commits_This_Repo", value: `${commitCount}` },
     ];
   }
 } catch {
