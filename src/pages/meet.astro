@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../config";
+
+const contactEmail = siteConfig.social.email;
+---
+
+<Layout
+  title={`Good to meet you // ${siteConfig.callsign}`}
+  description="Leave your contact and I'll follow up."
+>
+  <section class="py-8 max-w-xl mx-auto">
+    <div class="panel-header">
+      <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">handshake</span>
+      <h2 class="panel-label">Good_To_Meet_You</h2>
+    </div>
+
+    <div class="module-seam bg-[color:var(--surface-container-lowest)] p-6">
+      <p class="text-sm text-[color:var(--on-surface-variant)] mb-5">
+        Leave your contact, I'll follow up after the conference. Takes 10 seconds.
+      </p>
+
+      <form id="meet-form" class="space-y-4">
+        <div>
+          <label for="meet-name" class="block font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+            Name
+          </label>
+          <input
+            id="meet-name"
+            type="text"
+            required
+            class="w-full bg-[color:var(--surface-container-low)] border border-[color:var(--outline-variant)] px-3 py-2.5 text-sm text-[color:var(--on-surface)] focus:outline-none focus:border-[color:var(--primary)]"
+          />
+        </div>
+
+        <div>
+          <label for="meet-contact" class="block font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+            Best_Way_To_Reach_You
+          </label>
+          <input
+            id="meet-contact"
+            type="text"
+            required
+            placeholder="email, Telegram, LinkedIn, whatever's easiest"
+            class="w-full bg-[color:var(--surface-container-low)] border border-[color:var(--outline-variant)] px-3 py-2.5 text-sm text-[color:var(--on-surface)] focus:outline-none focus:border-[color:var(--primary)] placeholder:text-[color:var(--outline)]"
+          />
+        </div>
+
+        <div>
+          <label for="meet-note" class="block font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+            What_We_Talked_About
+            <span class="normal-case text-[color:var(--secondary)]">(optional)</span>
+          </label>
+          <textarea
+            id="meet-note"
+            rows="2"
+            class="w-full bg-[color:var(--surface-container-low)] border border-[color:var(--outline-variant)] px-3 py-2.5 text-sm text-[color:var(--on-surface)] focus:outline-none focus:border-[color:var(--primary)] resize-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
+        >
+          Send_Contact
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ contactEmail }}>
+  const form = document.getElementById("meet-form");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("meet-name").value.trim();
+    const contact = document.getElementById("meet-contact").value.trim();
+    const note = document.getElementById("meet-note").value.trim();
+    if (!name || !contact) return;
+
+    const subject = `Good to meet you, ${name}`;
+    const body = `Name: ${name}\nContact: ${contact}${note ? `\nContext: ${note}` : ""}`;
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
