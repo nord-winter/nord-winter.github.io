@@ -272,7 +272,6 @@ body {
    site looking like the same physical screen. */
 .terminal-frame {
   border: 1px solid var(--outline-variant);
-  box-shadow: 2px 2px 0px 0px var(--primary);
 }
 
 .terminal-screen {
