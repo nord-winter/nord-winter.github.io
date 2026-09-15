@@ -51,6 +51,7 @@
       localStorage.setItem(STORAGE_KEY, red ? "red" : "blue");
     } catch {}
     render();
+    document.dispatchEvent(new CustomEvent("nw:theme-change", { detail: { red } }));
   }
 
   toggle?.addEventListener("click", () => {

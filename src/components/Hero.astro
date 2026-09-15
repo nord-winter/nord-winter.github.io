@@ -6,16 +6,16 @@ import { siteConfig } from "../config";
   id="hero"
   class="module-seam bg-[color:var(--surface-container-lowest)] relative overflow-hidden p-6 lg:p-8"
 >
-  <div class="absolute top-0 left-0 w-full h-1 flex">
-    <span class="hero-split-a w-1/2 h-full"></span>
-    <span class="hero-split-b w-1/2 h-full"></span>
+  <div id="hero-split-bar" class="absolute top-0 left-0 w-full h-2 flex overflow-hidden">
+    <span class="hero-split-a hero-split-diag flex-1 h-full"></span>
+    <span class="hero-split-b flex-1 h-full"></span>
   </div>
 
   <div class="relative z-10 flex flex-col gap-6">
     <div class="flex items-center justify-between border-b border-[color:var(--outline-variant)] pb-4 flex-wrap gap-3">
       <div class="flex items-center gap-2 flex-wrap">
         <span class="font-mono text-xs bg-[color:var(--primary)] text-white px-2 py-0.5">
-          SYS_ID: PORTFOLIO_OS_v1.0
+          SYS_ID: NORD_WINTER_OS_v1.0
         </span>
         <span class="font-mono text-xs border border-[color:var(--outline)] px-2 py-0.5 text-[color:var(--on-surface-variant)]">
           AUTH: AUTHORIZED
@@ -49,12 +49,12 @@ import { siteConfig } from "../config";
       >
         // MISSION_CONTROL
       </h1>
-      <p class="mt-6 font-mono text-xs uppercase tracking-[0.08em] flex items-center gap-2">
-        <span class="hero-split-a-text">&gt; Dual_Protocol</span>
+      <p class="mt-6 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--primary)]">
+        &gt; Dual_Protocol
       </p>
       <p class="mt-2 text-base md:text-lg text-[color:var(--on-surface-variant)] max-w-xl">
-        <span class="hero-split-a-text font-semibold">Blue</span> builds it,
-        <span class="hero-split-b-text font-semibold">red</span> tries to break it. Same person, same standards, either color.
+        <span class="hero-word-blue font-semibold">Blue</span> builds it,
+        <span class="hero-word-red font-semibold">red</span> tries to break it. Same person, same standards, either color.
       </p>
     </div>
   </div>
@@ -84,6 +84,13 @@ import { siteConfig } from "../config";
     };
     type();
   }
+
+  const splitBar = document.getElementById("hero-split-bar");
+  document.addEventListener("nw:theme-change", () => {
+    if (!splitBar) return;
+    splitBar.classList.add("hero-split-glitch");
+    setTimeout(() => splitBar.classList.remove("hero-split-glitch"), 420);
+  });
 </script>
 
 <style>
@@ -105,13 +112,49 @@ import { siteConfig } from "../config";
     transition: background-color 0.4s ease;
   }
 
-  .hero-split-a-text {
-    color: var(--hero-split-a);
-    transition: color 0.4s ease;
+  .hero-split-diag {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    margin-right: -10px;
   }
 
-  .hero-split-b-text {
-    color: var(--hero-split-b);
-    transition: color 0.4s ease;
+  /* Fixed, never swap with the theme toggle: the word "Blue" is always
+     blue and the word "red" is always red, only the bar's left/right
+     positions invert. */
+  .hero-word-blue {
+    color: #00529b;
+  }
+
+  .hero-word-red {
+    color: #e0393f;
+  }
+
+  .hero-split-glitch {
+    animation: hero-glitch 0.42s steps(2, end);
+  }
+
+  @keyframes hero-glitch {
+    0% {
+      transform: translateX(0);
+      filter: none;
+    }
+    15% {
+      transform: translateX(-4px);
+      filter: brightness(1.6) saturate(1.5);
+    }
+    30% {
+      transform: translateX(3px);
+    }
+    45% {
+      transform: translateX(-2px);
+      opacity: 0.6;
+    }
+    60% {
+      transform: translateX(2px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0);
+      filter: none;
+    }
   }
 </style>
