@@ -21,6 +21,7 @@ export const siteConfig = {
     telegramChannel: "https://t.me/n0lltxt",
     telegramPersonal: "https://t.me/s1ma_out",
     discord: "https://discord.gg/ya7fWTXGx",
+    buyMeACoffee: "https://buymeacoffee.com/nord.winter",
   },
   aboutMe:
     "Backend and platform engineer with 6+ years across fintech and e-commerce, contributor to open source. Build and operate distributed systems with Go on GCP. Production experience on high-load systems and AI pipelines shipped to production. Open to remote Platform, Backend and SRE roles at Series B/C companies and lean startups.",
@@ -58,32 +59,6 @@ export const siteConfig = {
     "Certified good son, calls his parents back within 24 hours",
     "Undefeated at family game night since 2019, disputed but undefeated",
     "Waters the office plants without being asked, 100% survival rate",
-  ],
-  posts: [
-    {
-      date: "2026-08-28",
-      title: "What actually breaks when you autoscale GKE past 50 nodes",
-      tag: "GCP",
-      status: "DRAFT",
-    },
-    {
-      date: "2026-08-14",
-      title: "Terraform modules I reuse on every new infra project",
-      tag: "TERRAFORM",
-      status: "DRAFT",
-    },
-    {
-      date: "2026-07-30",
-      title: "Wiring a RAG pipeline into a production sales flow, notes from doing it twice",
-      tag: "AI",
-      status: "PLANNED",
-    },
-    {
-      date: "2026-07-09",
-      title: "Site build log: why this dashboard exists and what it's for",
-      tag: "META",
-      status: "PUBLISHED",
-    },
   ],
   skills: [
     "Go",

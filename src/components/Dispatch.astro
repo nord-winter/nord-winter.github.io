@@ -1,6 +1,18 @@
 ---
-import { siteConfig } from "../config";
-const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
+import { getCollection } from "astro:content";
+
+const postsRaw = await getCollection("posts");
+const posts = postsRaw
+  .map((p) => ({
+    slug: p.id,
+    date: p.data.date.toISOString().slice(0, 10),
+    title: p.data.title,
+    tag: p.data.tag,
+    status: p.data.status,
+  }))
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const hasPosts = posts.length > 0;
 ---
 
 {
@@ -12,7 +24,7 @@ const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
       <div class="panel-header">
         <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">rss_feed</span>
         <h2 class="panel-label">Dispatch_Log</h2>
-        <span class="panel-tag ml-auto">{siteConfig.posts.length} Entries</span>
+        <span class="panel-tag ml-auto">{posts.length} Entries</span>
       </div>
 
       <div class="module-seam bg-[color:var(--surface-container-lowest)] p-4 flex items-center gap-3 mb-4">
@@ -47,19 +59,31 @@ const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
             </tr>
           </thead>
           <tbody class="divide-y divide-[color:var(--outline-variant)]">
-            {siteConfig.posts.map((post) => (
+            {posts.map((post) => (
               <tr
                 class="log-row transition-colors"
                 data-title={post.title.toLowerCase()}
                 data-tag={post.tag.toLowerCase()}
               >
-                <td class="px-5 py-4 font-mono text-xs text-[color:var(--on-surface-variant)] whitespace-nowrap">
-                  {post.date}
+                <td class="p-0">
+                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-[color:var(--on-surface-variant)] whitespace-nowrap">
+                    {post.date}
+                  </a>
                 </td>
-                <td class="px-5 py-4 text-sm text-[color:var(--on-surface)]">{post.title}</td>
-                <td class="px-5 py-4 font-mono text-xs text-[color:var(--secondary)]">{post.tag}</td>
-                <td class="px-5 py-4 font-mono text-xs text-right text-[color:var(--primary)] font-bold">
-                  {post.status}
+                <td class="p-0">
+                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 text-sm text-[color:var(--on-surface)]">
+                    {post.title}
+                  </a>
+                </td>
+                <td class="p-0">
+                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-[color:var(--secondary)]">
+                    {post.tag}
+                  </a>
+                </td>
+                <td class="p-0">
+                  <a href={`/log/${post.slug}`} class="log-cell px-5 py-4 font-mono text-xs text-right text-[color:var(--primary)] font-bold justify-end">
+                    {post.status}
+                  </a>
                 </td>
               </tr>
             ))}
@@ -97,5 +121,10 @@ const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
   .log-row:hover {
     background: color-mix(in srgb, var(--primary) 5%, transparent);
     border-left: 3px solid var(--primary);
+  }
+
+  .log-cell {
+    display: flex;
+    align-items: center;
   }
 </style>

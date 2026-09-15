@@ -1,10 +1,11 @@
 ---
 import { siteConfig } from "../config";
+import { getCollection } from "astro:content";
 
 const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
 const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
 const hasEducation = siteConfig.education && siteConfig.education.length > 0;
-const hasPosts = siteConfig.posts && siteConfig.posts.length > 0;
+const hasPosts = (await getCollection("posts")).length > 0;
 const hasComms = Boolean(
   siteConfig.social.telegramChannel ||
     siteConfig.social.telegramPersonal ||
