@@ -8,62 +8,91 @@ export const siteConfig = {
   accentColor: "#00529b",
   services: [
     {
-      unit: "UNIT-S1 // COST",
-      name: "Infrastructure_Cost_Audit",
+      unit: "UNIT-S1 // AUDIT",
+      name: "Infra_Cost_And_Architecture_Review",
       pitch:
-        "Cut cloud spend 40% by automating VM lifecycle and rightsizing compute on GCP. Most GCP bills carry waste nobody's looked at closely, this finds it and fixes it.",
+        "A pass over what you're running and what it costs, before you commit to a rebuild. Where the money's going, what's oversized, what's one outage away from a bad week.",
       price: "On_Request",
       deliverables: [
-        "Line-by-line audit of your current GCP bill",
-        "Automated VM lifecycle rules (auto-suspend on idle)",
-        "Written report ranking fixes by savings vs. effort",
+        "Full read of the current setup: compute, storage, network, what's actually load-bearing",
+        "Ranked list of what to fix first, cost and risk both",
+        "Straight answer on whether you need a rebuild or just tuning",
       ],
-      cta: "Request_Audit",
-      mailSubject: "Infrastructure Cost Audit",
+      cta: "Get_A_Read",
+      mailSubject: "Infra Cost and Architecture Review",
     },
     {
-      unit: "UNIT-S2 // SCALE",
-      name: "High_Load_Architecture_Review",
+      unit: "UNIT-S2 // K8S",
+      name: "Kubernetes_And_Terraform_Setup",
       pitch:
-        "Built and operated systems sustaining 80K+ RPS in production. I stress-test your architecture before your users do.",
+        "Get your infrastructure running on Kubernetes with Terraform managing it, not clicked together by hand. GKE-native, reproducible, documented.",
       price: "On_Request",
       deliverables: [
-        "Load test against your actual traffic shape, not a synthetic one",
-        "A ranked list of what breaks first and why",
-        "Concrete fixes, not a slide deck of best practices",
+        "Production-ready Kubernetes cluster, sized for what you actually run",
+        "Terraform modules for the infra, checked into your own repo",
+        "Handoff docs so your team can run it without me",
       ],
-      cta: "Book_Review",
-      mailSubject: "Architecture Review",
+      cta: "Set_Up_My_Infra",
+      mailSubject: "Kubernetes and Terraform Setup",
     },
     {
-      unit: "UNIT-S3 // SRE",
-      name: "Platform_Reliability_Setup",
+      unit: "UNIT-S3 // OSS",
+      name: "Open_Source_Deployment",
       pitch:
-        "Maintained 97% uptime across production services with k6 and Grafana observability. That's the bar your stack gets held to.",
+        "Self-host the tool you want, running on hardware you control, not someone else's cloud.",
       price: "On_Request",
       deliverables: [
-        "k6 load tests wired into your CI",
-        "Grafana dashboards for the metrics that actually predict an outage",
-        "Alerting that pages on signal, not noise",
-      ],
-      cta: "Start_Consultation",
-      mailSubject: "Platform Reliability Consultation",
-    },
-    {
-      unit: "UNIT-S4 // INFRA",
-      name: "Personal_Infra_Setup",
-      pitch:
-        "Running a self-hosted stack at home (notes, monitoring, automation) behind a private network. If you or a small team want that kind of setup done properly, this is it.",
-      price: "On_Request",
-      deliverables: [
-        "Self-hosted services picked for what you actually need, not everything",
-        "Monitoring so you know it's broken before you notice by accident",
+        "The open source tool deployed and configured for your actual use case",
+        "Monitoring so you know if it goes down",
         "A setup you can maintain yourself after I leave",
       ],
-      cta: "Ask_About_This",
-      mailSubject: "Personal Infra Setup",
+      cta: "Deploy_This_For_Me",
+      mailSubject: "Open Source Deployment",
+    },
+    {
+      unit: "UNIT-S4 // SEC",
+      name: "Network_And_Security_Audit",
+      pitch:
+        "A look at your network setup and what's actually exposed, from someone who does this for CTFs, not just reads about it.",
+      price: "On_Request",
+      deliverables: [
+        "Network configuration review (firewall rules, exposure, access paths)",
+        "A real attempt to find what an attacker would find first",
+        "Ranked list of fixes, not a compliance checkbox report",
+      ],
+      cta: "Request_Audit",
+      mailSubject: "Network and Security Audit",
+    },
+    {
+      unit: "UNIT-S5 // DIY",
+      name: "DIY_Development",
+      pitch:
+        "Got a weird project that doesn't fit a normal job description? If it's the kind of thing I'd build for myself, I'll probably take it.",
+      price: "On_Request",
+      deliverables: [
+        "Whatever the project actually needs, scoped after we talk",
+        "Built the way I'd build it for myself, not cut corners",
+        "Honest answer if it's not a fit, not a padded quote",
+      ],
+      cta: "Tell_Me_About_It",
+      mailSubject: "DIY Project Inquiry",
     },
   ],
+  workshop: {
+    label: "Workshop_And_Webinar",
+    pitch:
+      "Bring me in to run a session for your team. Kubernetes fundamentals, Terraform workflows, Go concurrency, whatever gap you're trying to close. Format and length scoped to what you actually need, not a fixed curriculum.",
+    cta: "Propose_A_Topic",
+    mailSubject: "Workshop or Webinar Inquiry",
+  },
+  supportGoal: {
+    label: "Current_Goal",
+    item: "DJI Osmo Pocket 3",
+    reason:
+      "To actually film the builds and setups that end up on this site, not just describe them after the fact.",
+    currentAmount: 0,
+    targetAmount: 600,
+  },
   testimonials: [
     {
       quote:

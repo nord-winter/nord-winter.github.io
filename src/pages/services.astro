@@ -107,6 +107,22 @@ const mailBase = `mailto:${siteConfig.social.email}`;
       }
     </div>
 
+    <div class="mt-6 module-seam workshop-promo bg-[color:var(--primary)] text-white p-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+      <div>
+        <div class="font-mono text-xs uppercase tracking-[0.08em] flex items-center gap-1.5 mb-1 opacity-90">
+          <span class="material-symbols-outlined text-[16px]">campaign</span>
+          {siteConfig.workshop.label}
+        </div>
+        <p class="text-sm opacity-95 max-w-xl">{siteConfig.workshop.pitch}</p>
+      </div>
+      <a
+        href={`${mailBase}?subject=${encodeURIComponent(siteConfig.workshop.mailSubject)}`}
+        class="flex-shrink-0 py-2.5 px-5 text-center font-mono text-xs uppercase tracking-[0.08em] bg-white text-[color:var(--primary)] hover:brightness-95 transition-all"
+      >
+        {siteConfig.workshop.cta}
+      </a>
+    </div>
+
     <div class="mt-6 module-seam bg-[color:var(--surface-container-lowest)] p-4">
       <div class="mb-3 pb-2 border-b border-[color:var(--outline-variant)]">
         <span class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--secondary)]">

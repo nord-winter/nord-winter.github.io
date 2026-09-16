@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../config";
+
+const goal = siteConfig.supportGoal;
+const current = Number(goal.currentAmount);
+const target = typeof goal.targetAmount === "number" ? goal.targetAmount : null;
+const pct = target ? Math.min(100, Math.round((current / target) * 100)) : 0;
+---
+
+<Layout
+  title={`Support // ${siteConfig.callsign}`}
+  description="Support the projects and builds on this site directly."
+>
+  <section class="py-8 max-w-xl mx-auto">
+    <div class="panel-header">
+      <span class="material-symbols-outlined text-[color:var(--primary)] text-[20px]">local_cafe</span>
+      <h2 class="panel-label">Support</h2>
+      <a
+        href="/"
+        class="panel-tag ml-auto hover:text-[color:var(--primary)] transition-colors inline-flex items-center gap-1"
+      >
+        <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+        Back_To_Dashboard
+      </a>
+    </div>
+
+    <p class="text-sm text-[color:var(--on-surface-variant)] max-w-xl mb-5">
+      Everything I build here, the projects, the write-ups, the rig, I build on my own time and my own dime. If any of it's been useful to you, this is where that goes back.
+    </p>
+
+    <div class="module-seam bg-[color:var(--surface-container-lowest)] p-5">
+      <div class="font-mono text-xs uppercase tracking-[0.06em] text-[color:var(--primary)] mb-1">
+        {goal.label}
+      </div>
+      <h3 class="text-lg font-semibold text-[color:var(--on-surface)] mb-1">{goal.item}</h3>
+      <p class="text-sm text-[color:var(--on-surface-variant)] mb-4">{goal.reason}</p>
+
+      <div class="flex items-baseline justify-between font-mono text-xs text-[color:var(--secondary)] mb-1">
+        <span>${current} raised</span>
+        <span>${goal.targetAmount} goal</span>
+      </div>
+      <div class="h-2 bg-[color:var(--surface-container)] border border-[color:var(--outline-variant)] overflow-hidden">
+        <div class="h-full bg-[color:var(--primary)]" style={`width: ${pct}%`} />
+      </div>
+
+      <a
+        href={siteConfig.social.buyMeACoffee}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-4 inline-flex items-center gap-1.5 py-2.5 px-5 font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
+      >
+        Support_This
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+</Layout>
