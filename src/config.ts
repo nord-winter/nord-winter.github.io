@@ -150,6 +150,33 @@ export const siteConfig = {
     { label: "Authorization", value: "On_Request" },
     { label: "Language", value: "English, Russian" },
   ],
+  commsScenarios: [
+    {
+      prompt: "Need_Consulting",
+      description: "Infra, security or a project scoped from scratch.",
+      channel: "consulting",
+    },
+    {
+      prompt: "Have_A_Technical_Question",
+      description: "Quick question, not a full engagement.",
+      channel: "telegramPersonal",
+    },
+    {
+      prompt: "Want_To_Follow_My_Work",
+      description: "Build logs, write-ups, whatever ships next.",
+      channel: "telegramChannel",
+    },
+    {
+      prompt: "Business_Or_Hiring_Inquiry",
+      description: "Roles, partnerships, anything formal.",
+      channel: "email",
+    },
+    {
+      prompt: "Want_A_Workshop",
+      description: "Bring me in to run a session for your team.",
+      channel: "workshop",
+    },
+  ],
   social: {
     email: "vladsimutin@gmail.com",
     linkedin: "https://www.linkedin.com/in/vladislav-simutin/",
