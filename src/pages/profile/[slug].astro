@@ -80,7 +80,7 @@ const socialLinks = [
         <div class="w-16 h-16 rounded-full border-2 border-[color:var(--primary)] flex items-center justify-center flex-shrink-0">
           <span class="font-mono text-xl font-bold text-[color:var(--primary)]">{monogram}</span>
         </div>
-        <div>
+        <div class="flex-1">
           <h1 class="text-2xl md:text-3xl font-bold text-[color:var(--on-surface)]">
             {siteConfig.name}
           </h1>
@@ -89,6 +89,19 @@ const socialLinks = [
             Callsign: {siteConfig.callsign}
           </span>
         </div>
+        {
+          siteConfig.social.cv && (
+            <a
+              href={siteConfig.social.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-shrink-0 inline-flex items-center gap-1.5 py-2.5 px-4 font-mono text-xs uppercase tracking-[0.08em] bg-[color:var(--primary)] text-white hover:brightness-110 transition-all"
+            >
+              <span class="material-symbols-outlined text-[16px]">request_page</span>
+              Request_CV_Access
+            </a>
+          )
+        }
       </div>
 
       <p class="mt-6 text-[color:var(--on-surface)] leading-relaxed max-w-3xl">

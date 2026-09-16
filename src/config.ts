@@ -78,6 +78,44 @@ export const siteConfig = {
       mailSubject: "DIY Project Inquiry",
     },
   ],
+  expertise: [
+    {
+      unit: "EXP-1 // PLATFORM",
+      label: "Platform_Engineering",
+      problem:
+        "Infra clicked together by hand. It works until someone asks why the bill keeps climbing, or the one person who understands it is on vacation.",
+      approach:
+        "GCP-native distributed systems, Terraform-managed infrastructure, Kubernetes and Helm at production scale.",
+      evidence: [
+        "Reduced infrastructure costs 40% by automating LLM compute VM lifecycle through Terraform-managed provisioning",
+        "Architected and maintained 30+ microservices sustaining 80K+ RPS peak load",
+        "Maintained 97% platform uptime across 6 internal services via k6 and Grafana observability",
+      ],
+    },
+    {
+      unit: "EXP-2 // AI",
+      label: "AI_Integration",
+      problem:
+        "Everyone wants AI features. Most of what gets built stays a demo, never reaches production traffic.",
+      approach:
+        "RAG pipelines and AI agents in production, vLLM, Qdrant, MCP servers and GenKit, from vector search to end-to-end automation.",
+      evidence: [
+        "Delivered a production RAG sales agent, intent pipeline through CTA, integrating a vector database, relational database and external data sources via GenKit",
+      ],
+    },
+    {
+      unit: "EXP-3 // SEC",
+      label: "Offensive_Security",
+      problem:
+        "You do not know what is actually exposed until someone finds it first, and it is rarely you.",
+      approach:
+        "Daily HackTheBox practice, CTF PHDays 2019 Top 3 finish, TryHackMe and Cisco security certifications behind it, the same attacker mindset that goes into hardening what I build.",
+      evidence: [
+        "Secured Linux-based infrastructure, 99.9% uptime maintained under active threat monitoring",
+        "CTF PHDays 2019, Top 3 finish",
+      ],
+    },
+  ],
   workshop: {
     label: "Workshop_And_Webinar",
     pitch:
@@ -121,6 +159,7 @@ export const siteConfig = {
     telegramPersonal: "https://t.me/s1ma_out",
     discord: "https://discord.gg/ya7fWTXGx",
     buyMeACoffee: "https://buymeacoffee.com/nord.winter",
+    cv: "https://drive.google.com/file/d/1GP-JiDil6Fkq559hEX9cmVFPLBhF7PhQ/view?usp=sharing",
   },
   aboutMe:
     "Backend and platform engineer with 6+ years across fintech and e-commerce, contributor to open source. Build and operate distributed systems with Go on GCP. Production experience on high-load systems and AI pipelines shipped to production. Open to remote Platform, Backend and SRE roles at Series B/C companies and lean startups.",
